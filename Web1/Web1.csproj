@@ -1,0 +1,75 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net452</TargetFramework>
+    <RuntimeIdentifier>win7-x64</RuntimeIdentifier>
+    <IsServiceFabricServiceProject>True</IsServiceFabricServiceProject>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="wwwroot\NewFolder1\**" />
+    <Content Remove="wwwroot\NewFolder1\**" />
+    <EmbeddedResource Remove="wwwroot\NewFolder1\**" />
+    <None Remove="wwwroot\NewFolder1\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="wwwroot/Images\18699856_1651898691505550_3242636166079606581_n.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="wwwroot\hashtags.html" />
+    <Content Include="wwwroot\htmlpage.html" />
+    <Content Include="wwwroot\image.html" />
+    <Content Include="wwwroot\Images\beechers.jpg" />
+    <Content Include="wwwroot\Images\boston.jpg" />
+    <Content Include="wwwroot\Images\crepe.jpg" />
+    <Content Include="wwwroot\Images\fruit.jpg" />
+    <Content Include="wwwroot\Images\gelato.jpg" />
+    <Content Include="wwwroot\Images\header.png" />
+    <Content Include="wwwroot\Images\icon.png" />
+    <Content Include="wwwroot\Images\latte.jpg" />
+    <Content Include="wwwroot\Images\needle.jpg" />
+    <Content Include="wwwroot\Images\nyc.jpg" />
+    <Content Include="wwwroot\Images\search2.png" />
+    <Content Include="wwwroot\Images\sf.jpg" />
+    <Content Include="wwwroot\Images\taiwan.jpg" />
+    <Content Include="wwwroot\Images\victoria.jpg" />
+    <Content Include="wwwroot\login.html" />
+    <Content Include="wwwroot\picupload.html" />
+    <Content Include="wwwroot\post.html" />
+    <Content Include="wwwroot\signup.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.0.0" />
+    <PackageReference Include="Microsoft.AspNet.Mvc" Version="5.2.3" />
+    <PackageReference Include="Microsoft.AspNet.WebApi" Version="5.2.3" />
+    <PackageReference Include="Microsoft.AspNet.WebApi.Core" Version="5.2.3" />
+    <PackageReference Include="Microsoft.AspNet.WebPages" Version="3.2.3" />
+    <PackageReference Include="Microsoft.AspNetCore" Version="1.1.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="1.1.3" />
+    <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="1.1.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="1.1.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="1.1.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer.Design" Version="1.1.2" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="1.1.2" />
+    <PackageReference Include="Microsoft.Net.Http" Version="2.2.29" />
+    <PackageReference Include="Microsoft.ServiceFabric" Version="5.6.210" />
+    <PackageReference Include="Microsoft.ServiceFabric.AspNetCore.WebListener" Version="2.6.210" />
+    <PackageReference Include="Microsoft.ServiceFabric.Data" Version="2.6.210" />
+    <PackageReference Include="Microsoft.ServiceFabric.Services" Version="2.6.210" />
+    <PackageReference Include="Microsoft.ServiceFabric.Services.Remoting" Version="2.6.220" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="1.1.2" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="1.1.1" />
+    <PackageReference Include="System.IO.Abstractions" Version="2.0.0.144" />
+    <PackageReference Include="System.Net.Http" Version="4.3.2" />
+    <PackageReference Include="System.Web.Http.Common" Version="4.0.20126.16343" />
+  </ItemGroup>
+  <ItemGroup>
+    <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="1.0.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AppCommon\AppCommon.csproj" />
+  </ItemGroup>
+
+</Project>

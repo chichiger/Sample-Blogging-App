@@ -1,0 +1,161 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <link rel="icon" href="http://localhost:8490/Images/icon.png" type="image/gif">
+    <style>
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: skyblue;
+            position: fixed;
+            top: 0;
+            width: 100%;
+        }
+
+        li {
+            float: left;
+        }
+
+            li a {
+                display: block;
+                color: white;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+            }
+
+                li a:hover {
+                    background-color: #111;
+                }
+
+        /* Full-width input fields */
+        input[type=text], input[type=password], input[type=username] {
+            width: 50%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        /* Set a style for all buttons */
+        button {
+            background-color: #ADD8E6;
+            color: black;
+            font-weight: bold;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        body {
+            background-color: LightCyan;
+            text-align: center;
+        }
+
+
+        /* Extra styles for the cancel button */
+        .cancelbtn, .signupbtn {
+            padding: 14px 20px;
+            color: white;
+            background-color: #87CEFA;
+        }
+
+        /* Float cancel and signup buttons and add an equal width */
+        .cancelbtn, .signupbtn {
+            width: 25%;
+        }
+
+        /* Add padding to container elements */
+        .container {
+            padding: 16px;
+        }
+
+        /* Clear floats */
+        .clearfix::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+
+        .previewimg {
+            max-width: 500px;
+        }
+
+        /* Change styles for cancel button and signup button on extra small screens */
+        @media screen and (max-width: 300px) {
+            .cancelbtn, .signupbtn {
+                width: 100%;
+            }
+        }
+
+        .header {
+            background-color: darkorchid;
+            color: white;
+        }
+
+    </style>
+</head>
+<body>
+
+    <ul>
+        <li><a href="htmlpage.html">Home</a></li>
+        <li><a href="hashtags.html">Hashtags</a></li>
+        <li style="float:right"><a class="header" href="login.html">Login/Logout</a></li>
+        <li><a href="signup.html">Signup</a></li>
+        <li><a href="post.html">New Post</a></li>
+        <li><a href="image.html">New Image</a></li>
+    </ul>
+    <p><br></p>
+    <h2>New Post</h2>
+    <form>
+
+        <div class="container">
+            <p><label><b>File Upload Image</b></label></p>
+            <input id="id10" type="file" accept="image/*" class="imgbtn" onchange="previewFile(event)" />
+            <p><label><b>Enter Hashtag</b></label></p>
+            <p><label><b><input id="id11" type="text" placeholder="Hashtag"></b></label></p>
+            
+
+
+        </div>
+
+        <script>
+            var previewFile = function (event) {
+                var output = document.getElementById('output');
+                output.src = URL.createObjectURL(event.target.files[0]);
+            };
+        </script>
+
+        
+
+        <script type="text/javascript">
+            function visitPage() {
+                var x = document.getElementById("id10").value;
+                var z = "&id11=";
+                var y = document.getElementById("id11").value;
+                // proceed only when user has entered email and password
+                if (x == "" || y == "") {
+                    alert('Please enter all fields');
+                    return false;
+                }
+                
+                window.location = 'http://localhost:8490/api/image?id10='.concat(x, z, y);
+            }
+        </script>
+
+
+
+        <div class="clearfix">
+            <input type="reset" class="cancelbtn" value="Cancel">
+            <input type="button" class="signupbtn" value="Submit" onclick="visitPage()">
+        </div>
+        <p><br></p>
+        <img id="output" class="previewimg">
+    </form>
+</body>
+</html>

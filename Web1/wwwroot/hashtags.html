@@ -1,0 +1,361 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Tangerine">
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Open+Sans">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="icon" href="http://localhost:8490/Images/icon.png" type="image/gif">
+
+    <style>
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: skyblue;
+            position: fixed;
+            top: 0;
+            width: 100%;
+        }
+
+        li {
+            float: left;
+        }
+
+            li a {
+                display: block;
+                color: white;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+            }
+
+                li a:hover {
+                    background-color: #111;
+                }
+
+        .title{
+            font-family: 'Tangerine', serif;
+            font-size: 60px;
+            text-shadow: 4px 4px 4px #aaa;
+            text-align: center;
+            padding-top: 10px;
+        }
+
+        .newposts {
+            font-family: 'Comic Sans MS';
+            font-size: 25px;
+            color: rebeccapurple;
+            text-align: center;
+            
+        }
+
+        form {
+            width: 500px;
+            margin: 50px auto;
+        }
+
+        .search {
+            padding: 8px 15px;
+            background: rgba(50, 50, 50, 0.2);
+            border: 0px solid #dbdbdb;
+        }
+
+        .button {
+            position: relative;
+            padding: 6px 15px;
+            left: -8px;
+            border: 2px solid #207cca;
+            background-color: #207cca;
+            color: #fafafa;
+        }
+
+        .button:hover {
+                background-color: #fafafa;
+                color: #207cca;
+        }
+
+        .searchbox1 {
+            background-color: #fffbf8;
+            padding: 13px;
+            width: 335px;
+            margin: 50px auto;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            border-radius: 6px;
+            -webkit-box-shadow: 0 2px 4px 0 rgba(72, 72, 72, 0.83), 0 10px 15px 0 rgba(126, 126, 126, 0.12), 0 -2px 6px 1px rgba(199, 199, 199, 0.55) inset, 0 2px 4px 2px rgba(255, 255, 255, 0.83) inset;
+            -moz-box-shadow: 0 2px 4px 0 rgba(72, 72, 72, 0.83), 0 10px 15px 0 rgba(126, 126, 126, 0.12), 0 -2px 6px 1px rgba(199, 199, 199, 0.55) inset, 0 2px 4px 2px rgba(255, 255, 255, 0.83) inset;
+            box-shadow: 0 2px 4px 0 rgba(72, 72, 72, 0.83), 0 10px 15px 0 rgba(126, 126, 126, 0.12), 0 -2px 6px 1px rgba(199, 199, 199, 0.55) inset, 0 2px 4px 2px rgba(255, 255, 255, 0.83) inset;
+        }
+
+        .search1 {
+            width: 250px;
+            height: 30px;
+            padding-left: 15px;
+            border-radius: 6px;
+            border: none;
+            color: #0F0D0D;
+            font-weight: 500;
+            background-color: #E2EFF7;
+            -webkit-box-shadow: 0 -2px 2px 0 rgba(199, 199, 199, 0.55), 0 1px 1px 0 #fff, 0 2px 2px 1px #fafafa, 0 2px 4px 0 #b2b2b2 inset, 0 -1px 1px 0 #f2f2f2 inset, 0 15px 15px 0 rgba(41, 41, 41, 0.09) inset;
+            -moz-box-shadow: 0 -2px 2px 0 rgba(199, 199, 199, 0.55), 0 1px 1px 0 #fff, 0 2px 2px 1px #fafafa, 0 2px 4px 0 #b2b2b2 inset, 0 -1px 1px 0 #f2f2f2 inset, 0 15px 15px 0 rgba(41, 41, 41, 0.09) inset;
+            box-shadow: 0 -2px 2px 0 rgba(199, 199, 199, 0.55), 0 1px 1px 0 #fff, 0 2px 2px 1px #fafafa, 0 2px 4px 0 #b2b2b2 inset, 0 -1px 1px 0 #f2f2f2 inset, 0 15px 15px 0 rgba(41, 41, 41, 0.09) inset;
+        }
+
+        .submit1 {
+            width: 35px;
+            height: 30px;
+            background-image: url(http://localhost:8490/Images/search2.png);
+            background-repeat: no-repeat;
+            background-position: 17px 8px;
+            background-color: transparent;
+            background-size: 20px 20px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .search1:focus {
+            outline: 0;
+        }
+
+        .fa {
+            font-size: 50px;
+            cursor: pointer;
+            user-select: none;
+            position:absolute;
+            right: 100px;
+        }
+
+            .fa:hover {
+                color: darkblue;
+            }
+
+      
+
+   #myBtn {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 30px;
+            z-index: 99;
+            border: none;
+            outline: none;
+            background-color: red;
+            color: white;
+            cursor: pointer;
+            padding: 15px;
+            border-radius: 10px;
+   }
+
+    #myBtn:hover {
+            background-color: #555;
+    }
+
+        .header {
+            background-color: darkorchid;
+            color: white;
+        }
+
+
+    </style>
+</head>
+<body>
+
+    <ul>
+        <li><a href="htmlpage.html">Home</a></li>
+        <li><a href="hashtags.html">Hashtags</a></li>
+        <li style="float:right"><a class="header" href="login.html">Login/Logout</a></li>
+        <li><a href="signup.html">Signup</a></li>
+        <li><a href="post.html">New Post</a></li>
+        <li><a href="image.html">New Image</a></li>
+    </ul>
+    <p><br></p>
+   
+
+    <div class="title">Hashtags</div>
+    <script type="text/javascript">
+        function visitPage() {
+            function getText() {
+                var x = document.getElementById("id1").value;
+                // only proceed if user enters a hashtag
+                if (x == " " || x.length == 0) {
+                    alert('Please enter a hashtag');
+                    return false;
+                }
+                var http = new XMLHttpRequest();
+                http.onreadystatechange = function () {
+                    if (http.readyState == 4) {
+                        var str = "https://";
+                        var str2 = "http://";
+
+                        var words = http.responseText.split('~');
+                        for (i = 0; i < words.length; i++) {
+                            if (i % 2 == 0 && i != 0) {
+                                if (words[i].indexOf(str) >= 0 || (words[i].indexOf(str2) >= 0)) {
+                                    var n = document.createElement("IMG");
+                                    n.style.maxHeight = "600px";
+                                    n.setAttribute("src", words[i]);
+                                    document.getElementById("demo").innerHTML += "<br>";
+                                    document.getElementById("demo").appendChild(n);
+                                }
+
+                                else {
+                                    document.getElementById("demo").innerHTML += "<br>";
+                                    document.getElementById("demo").innerHTML += words[i];
+                                    document.getElementById("demo").innerHTML += " ";
+                                }
+
+                            }
+                            else {
+                                if (words[i].indexOf(str) >= 0 || (words[i].indexOf(str2) >= 0)) {
+                                    var n = document.createElement("IMG");
+                                    n.setAttribute("src", words[i]);
+                                    document.getElementById("demo").innerHTML += "<br>";
+                                    document.getElementById("demo").appendChild(n);
+                                }
+
+                                else {
+                                    document.getElementById("demo").innerHTML += words[i];
+                                    document.getElementById("demo").innerHTML += " ";
+                                }
+                            }
+
+                        }
+                    }
+                };
+                http.open("GET", 'http://localhost:8490/api/hashtags?id1='.concat(x), true);
+                http.send();
+            }
+
+            function getImage() {
+                var x = document.getElementById("id1").value;
+                
+                   
+                // only proceed if user enters a hashtag
+                if (x == " " || x.length == 0) {
+                    alert('Please enter a hashtag');
+                    return false;
+                }
+                var http = new XMLHttpRequest();
+                http.onreadystatechange = function () {
+                    if (http.readyState == 4) {
+                        var words = http.responseText.split('~');
+                        for (i = 0; i < words.length - 1; i++) {
+
+                            /*
+                            var n = document.createElement("IMG");
+                            n.style.maxHeight = "600px";
+                            n.setAttribute("src", "data:image/jpg;base64," + words[i]);
+                            document.getElementById("demo").innerHTML += "<br>";
+                            document.getElementById("demo").appendChild(n);
+                            */
+
+                            
+                            if (i % 2 == 1 && i != 0) {
+                                var n = document.createElement("IMG");
+                                n.style.maxHeight = "600px";
+                                n.setAttribute("src", "data:image/jpg;base64," + words[i]);
+                                document.getElementById("demo").innerHTML += "<br>";
+                                document.getElementById("demo").appendChild(n);
+                               
+                            }
+                            else {
+                                document.getElementById("demo").innerHTML += words[i];
+                                document.getElementById("demo").innerHTML += " ";
+                            }
+                            
+
+                        }
+
+
+                    }
+                };
+
+                http.open("GET", 'http://localhost:8490/api/getimg?id1='.concat(x), true);
+                http.send();
+            };
+
+            getText();
+            getImage();
+           
+            
+        }
+
+    </script>
+
+   
+    
+
+    <script>
+         function showHint(str)
+         {
+             var x = id1.value;
+             if (str.length == 0)
+             {
+                 document.getElementById("txtHint").innerHTML = "";
+                 return;
+             }
+             else {
+                 var xmlhttp = new XMLHttpRequest();
+                 xmlhttp.onreadystatechange = function () {
+                     if (this.readyState == 4 && this.status == 200) {
+                         if (this.responseText == "")
+                         {
+                             document.getElementById("txtHint").innerHTML = "No matches";
+                         }
+                         else {
+                             document.getElementById("txtHint").innerHTML = this.responseText;
+                         }
+                         
+                     }
+                 };
+                 xmlhttp.open("GET", 'http://localhost:8490/api/search?id1='.concat(x), true);
+                 xmlhttp.send();
+             }
+         }
+    </script>
+
+    
+
+    
+    <form class=" = searchbox1">
+        <input id="id1" type="text" class="search1" placeholder="Search..."onkeyup="showHint(id1.value)" >
+        <input type="button" class="submit1" value="" onclick="visitPage()" />
+        <p>Suggestions: <span id="txtHint"></span></p>
+    </form>
+    
+    <p class="newposts" id="demo"></p>
+    <p><br></p>
+    <img id="output" class="previewimg">
+    
+   
+        
+
+    <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+
+
+    <script>
+        // When the user scrolls down 20px from the top of the document, show the button
+        window.onscroll = function () { scrollFunction() };
+
+        function scrollFunction() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                document.getElementById("myBtn").style.display = "block";
+            } else {
+                document.getElementById("myBtn").style.display = "none";
+            }
+        }
+
+        // When the user clicks on the button, scroll to the top of the document
+        function topFunction() {
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+        }
+    </script>
+   
+
+</body>
+</html>
