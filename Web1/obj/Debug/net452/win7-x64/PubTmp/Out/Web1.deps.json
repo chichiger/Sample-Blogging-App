@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETFramework,Version=v4.5.2/win7-x64",
-    "signature": "fa007d6cd30ff2c209dd11aa6564d62ecf1a87e5"
+    "signature": "057c342e1ed17eb21849a672dc1cb270a02a5349"
   },
   "compilationOptions": {
     "defines": [
@@ -37,10 +37,10 @@
           "Microsoft.EntityFrameworkCore.SqlServer.Design": "1.1.2",
           "Microsoft.Extensions.Logging.Debug": "1.1.2",
           "Microsoft.Net.Http": "2.2.29",
-          "Microsoft.ServiceFabric": "5.6.210",
-          "Microsoft.ServiceFabric.AspNetCore.WebListener": "2.6.210",
-          "Microsoft.ServiceFabric.Data": "2.6.210",
-          "Microsoft.ServiceFabric.Services": "2.6.210",
+          "Microsoft.ServiceFabric": "5.6.220",
+          "Microsoft.ServiceFabric.AspNetCore.WebListener": "2.6.220",
+          "Microsoft.ServiceFabric.Data": "2.6.220",
+          "Microsoft.ServiceFabric.Services": "2.6.220",
           "Microsoft.ServiceFabric.Services.Remoting": "2.6.220",
           "Microsoft.VisualStudio.Web.BrowserLink": "1.1.2",
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "1.1.1",
@@ -1457,7 +1457,7 @@
         }
       },
       "microsoft.netcore.platforms/1.1.0": {},
-      "microsoft.servicefabric/5.6.210": {
+      "microsoft.servicefabric/5.6.220": {
         "compile": {
           "lib/net45/Microsoft.ServiceFabric.Internal.Strings.dll": {},
           "lib/net45/Microsoft.ServiceFabric.Internal.dll": {},
@@ -1467,7 +1467,7 @@
           "lib/net45/System.Fabric.dll": {}
         }
       },
-      "microsoft.servicefabric.aspnetcore.weblistener/2.6.210": {
+      "microsoft.servicefabric.aspnetcore.weblistener/2.6.220": {
         "dependencies": {
           "Microsoft.AspNetCore.Hosting": "1.1.2",
           "Microsoft.AspNetCore.Hosting.Abstractions": "1.1.2",
@@ -1477,16 +1477,16 @@
           "Microsoft.AspNetCore.Server.WebListener": "1.0.0",
           "Microsoft.Extensions.DependencyInjection": "1.1.1",
           "Microsoft.Extensions.DependencyInjection.Abstractions": "1.1.1",
-          "Microsoft.ServiceFabric.Services": "2.6.210"
+          "Microsoft.ServiceFabric.Services": "2.6.220"
         },
         "compile": {
           "lib/net452/Microsoft.ServiceFabric.AspNetCore.WebListener.dll": {},
           "lib/net452/Microsoft.ServiceFabric.AspNetCore.dll": {}
         }
       },
-      "microsoft.servicefabric.data/2.6.210": {
+      "microsoft.servicefabric.data/2.6.220": {
         "dependencies": {
-          "Microsoft.ServiceFabric": "5.6.210"
+          "Microsoft.ServiceFabric": "5.6.220"
         },
         "compile": {
           "lib/net45/Microsoft.ServiceFabric.Data.Interfaces.dll": {},
@@ -1495,16 +1495,16 @@
       },
       "microsoft.servicefabric.fabrictransport.internal/2.6.220": {
         "dependencies": {
-          "Microsoft.ServiceFabric": "5.6.210"
+          "Microsoft.ServiceFabric": "5.6.220"
         },
         "compile": {
           "lib/net45/Microsoft.ServiceFabric.FabricTransport.dll": {}
         }
       },
-      "microsoft.servicefabric.services/2.6.210": {
+      "microsoft.servicefabric.services/2.6.220": {
         "dependencies": {
-          "Microsoft.ServiceFabric": "5.6.210",
-          "Microsoft.ServiceFabric.Data": "2.6.210"
+          "Microsoft.ServiceFabric": "5.6.220",
+          "Microsoft.ServiceFabric.Data": "2.6.220"
         },
         "compile": {
           "lib/net45/Microsoft.ServiceFabric.Services.dll": {}
@@ -1513,7 +1513,7 @@
       "microsoft.servicefabric.services.remoting/2.6.220": {
         "dependencies": {
           "Microsoft.ServiceFabric.FabricTransport.Internal": "2.6.220",
-          "Microsoft.ServiceFabric.Services": "2.6.210"
+          "Microsoft.ServiceFabric.Services": "2.6.220"
         },
         "compile": {
           "lib/net45/Microsoft.ServiceFabric.Services.Remoting.dll": {}
@@ -1802,10 +1802,10 @@
           "Microsoft.EntityFrameworkCore.SqlServer.Design": "1.1.2",
           "Microsoft.Extensions.Logging.Debug": "1.1.2",
           "Microsoft.Net.Http": "2.2.29",
-          "Microsoft.ServiceFabric": "5.6.210",
-          "Microsoft.ServiceFabric.AspNetCore.WebListener": "2.6.210",
-          "Microsoft.ServiceFabric.Data": "2.6.210",
-          "Microsoft.ServiceFabric.Services": "2.6.210",
+          "Microsoft.ServiceFabric": "5.6.220",
+          "Microsoft.ServiceFabric.AspNetCore.WebListener": "2.6.220",
+          "Microsoft.ServiceFabric.Data": "2.6.220",
+          "Microsoft.ServiceFabric.Services": "2.6.220",
           "Microsoft.ServiceFabric.Services.Remoting": "2.6.220",
           "Microsoft.VisualStudio.Web.BrowserLink": "1.1.2",
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "1.1.1",
@@ -2870,7 +2870,7 @@
         }
       },
       "microsoft.netcore.platforms/1.1.0": {},
-      "microsoft.servicefabric/5.6.210": {
+      "microsoft.servicefabric/5.6.220": {
         "runtime": {
           "lib/net45/Microsoft.ServiceFabric.Internal.Strings.dll": {},
           "lib/net45/Microsoft.ServiceFabric.Internal.dll": {},
@@ -2880,7 +2880,7 @@
           "lib/net45/System.Fabric.dll": {}
         }
       },
-      "microsoft.servicefabric.aspnetcore.weblistener/2.6.210": {
+      "microsoft.servicefabric.aspnetcore.weblistener/2.6.220": {
         "dependencies": {
           "Microsoft.AspNetCore.Hosting": "1.1.2",
           "Microsoft.AspNetCore.Hosting.Abstractions": "1.1.2",
@@ -2890,16 +2890,16 @@
           "Microsoft.AspNetCore.Server.WebListener": "1.0.0",
           "Microsoft.Extensions.DependencyInjection": "1.1.1",
           "Microsoft.Extensions.DependencyInjection.Abstractions": "1.1.1",
-          "Microsoft.ServiceFabric.Services": "2.6.210"
+          "Microsoft.ServiceFabric.Services": "2.6.220"
         },
         "runtime": {
           "lib/net452/Microsoft.ServiceFabric.AspNetCore.WebListener.dll": {},
           "lib/net452/Microsoft.ServiceFabric.AspNetCore.dll": {}
         }
       },
-      "microsoft.servicefabric.data/2.6.210": {
+      "microsoft.servicefabric.data/2.6.220": {
         "dependencies": {
-          "Microsoft.ServiceFabric": "5.6.210"
+          "Microsoft.ServiceFabric": "5.6.220"
         },
         "runtime": {
           "lib/net45/Microsoft.ServiceFabric.Data.Interfaces.dll": {},
@@ -2908,16 +2908,16 @@
       },
       "microsoft.servicefabric.fabrictransport.internal/2.6.220": {
         "dependencies": {
-          "Microsoft.ServiceFabric": "5.6.210"
+          "Microsoft.ServiceFabric": "5.6.220"
         },
         "runtime": {
           "lib/net45/Microsoft.ServiceFabric.FabricTransport.dll": {}
         }
       },
-      "microsoft.servicefabric.services/2.6.210": {
+      "microsoft.servicefabric.services/2.6.220": {
         "dependencies": {
-          "Microsoft.ServiceFabric": "5.6.210",
-          "Microsoft.ServiceFabric.Data": "2.6.210"
+          "Microsoft.ServiceFabric": "5.6.220",
+          "Microsoft.ServiceFabric.Data": "2.6.220"
         },
         "runtime": {
           "lib/net45/Microsoft.ServiceFabric.Services.dll": {}
@@ -2926,7 +2926,7 @@
       "microsoft.servicefabric.services.remoting/2.6.220": {
         "dependencies": {
           "Microsoft.ServiceFabric.FabricTransport.Internal": "2.6.220",
-          "Microsoft.ServiceFabric.Services": "2.6.210"
+          "Microsoft.ServiceFabric.Services": "2.6.220"
         },
         "runtime": {
           "lib/net45/Microsoft.ServiceFabric.Services.Remoting.dll": {}
@@ -3947,26 +3947,26 @@
       "path": "microsoft.netcore.platforms/1.1.0",
       "hashPath": "microsoft.netcore.platforms.1.1.0.nupkg.sha512"
     },
-    "microsoft.servicefabric/5.6.210": {
+    "microsoft.servicefabric/5.6.220": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-3vWQFiMtZamLz/zgXwaGzAdK4dAZUnl2UKqzdC9rMjrZhA/J09FeEUOqyZWzO8Yf3OnXLFn9E3gw+sxm0z746Q==",
-      "path": "microsoft.servicefabric/5.6.210",
-      "hashPath": "microsoft.servicefabric.5.6.210.nupkg.sha512"
+      "sha512": "sha512-gW8/Gc8A3d4zvmCWxvoOpYmi0JmEDhmf9oDEroHCD59err6joHXKnHqIjltstzIDGA2Hkumahgk6nK8WUOzndw==",
+      "path": "microsoft.servicefabric/5.6.220",
+      "hashPath": "microsoft.servicefabric.5.6.220.nupkg.sha512"
     },
-    "microsoft.servicefabric.aspnetcore.weblistener/2.6.210": {
+    "microsoft.servicefabric.aspnetcore.weblistener/2.6.220": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-+Y6umwdniIvKbJe/8gZOhvwz9OTDEfilDd9FOn6qBALUB9NHUpzYnb/lxdtp3FhDltra9oZoZVi01N3XLDkOTQ==",
-      "path": "microsoft.servicefabric.aspnetcore.weblistener/2.6.210",
-      "hashPath": "microsoft.servicefabric.aspnetcore.weblistener.2.6.210.nupkg.sha512"
+      "sha512": "sha512-FN67VVsI3+C8pIXWqrKr6tGP2NtyOiYsBj9coUUOmtrEalU1cirJzPCsEQNi7f9hb8v1UaLndSx8/j3uxt+hFw==",
+      "path": "microsoft.servicefabric.aspnetcore.weblistener/2.6.220",
+      "hashPath": "microsoft.servicefabric.aspnetcore.weblistener.2.6.220.nupkg.sha512"
     },
-    "microsoft.servicefabric.data/2.6.210": {
+    "microsoft.servicefabric.data/2.6.220": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-Jk2dNENgc7m+07edl2T1Fx/caR00fbpB7opdQuH8J1z7cGNgx6H7fn4o95ozkyK7QOGTI3OpUnb470tgo0e2ow==",
-      "path": "microsoft.servicefabric.data/2.6.210",
-      "hashPath": "microsoft.servicefabric.data.2.6.210.nupkg.sha512"
+      "sha512": "sha512-g09ReqSY16zxNoYn3lnaY1U0C3HRI0Nha4HgbADA5uvPhQXrte+KWbHVMwy9QF33qwFwbzrqcYyYwis4DxWc2Q==",
+      "path": "microsoft.servicefabric.data/2.6.220",
+      "hashPath": "microsoft.servicefabric.data.2.6.220.nupkg.sha512"
     },
     "microsoft.servicefabric.fabrictransport.internal/2.6.220": {
       "type": "package",
@@ -3975,12 +3975,12 @@
       "path": "microsoft.servicefabric.fabrictransport.internal/2.6.220",
       "hashPath": "microsoft.servicefabric.fabrictransport.internal.2.6.220.nupkg.sha512"
     },
-    "microsoft.servicefabric.services/2.6.210": {
+    "microsoft.servicefabric.services/2.6.220": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-4LioTEIJrwOrVT/U55GkWOEwR9cgbOUTJTryBkc9QM3+YzVy56acHmqxe9hwkRvVeuVqMc6RlzVu2q4zvYBbfw==",
-      "path": "microsoft.servicefabric.services/2.6.210",
-      "hashPath": "microsoft.servicefabric.services.2.6.210.nupkg.sha512"
+      "sha512": "sha512-wfOTx5mMFKsKyOKRqp8+wT7ikQIOtN7mHVeLCfDluqFVLMFP6yG8JiJeL6a2P9eU2K2yYGwuQrPqV3ACG+Hsfg==",
+      "path": "microsoft.servicefabric.services/2.6.220",
+      "hashPath": "microsoft.servicefabric.services.2.6.220.nupkg.sha512"
     },
     "microsoft.servicefabric.services.remoting/2.6.220": {
       "type": "package",

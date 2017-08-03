@@ -321,8 +321,17 @@ namespace Stateful1
 
         public async Task<string> logOut()
         {
-            logged[0] = "false";
-            return "Logged Out";
+
+            using (ITransaction tx = this.StateManager.CreateTransaction())
+            {
+
+                await tx.CommitAsync();
+                logged[0] = "false";
+                return "Logged Out";
+
+            }
+            //logged[0] = "false";
+            //return "Logged Out";
         }
 
         public async Task<string> uploadImage(string URL, string tag)
