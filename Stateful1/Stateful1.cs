@@ -112,14 +112,11 @@ namespace Stateful1
                 
                 await tx.CommitAsync();
 
-
-                //return total.ToString();
                 foreach (string i in results)
                 {
                     Console.WriteLine("{0}\t", i);
                 }
                 string output = string.Join(" ", results.ToArray());
-                //return output;
                 return "Successfully posted";
                 
             }
