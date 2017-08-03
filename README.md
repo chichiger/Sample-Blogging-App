@@ -23,5 +23,6 @@ This sample app contains two services and demonstrates how to use key parts of S
   ### Key Concepts
   * Reliable Collections
   * MVC Controllers
-Flowchart of the stateless front end interacting with the stateful back end
+  
+#### Flowchart of the stateless front end interacting with the stateful back end
 ![Imgur Image](http://i.imgur.com/Yd3aceo.png)
