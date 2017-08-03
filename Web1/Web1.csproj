@@ -28,6 +28,7 @@
     <Content Include="wwwroot\Images\gelato.jpg" />
     <Content Include="wwwroot\Images\header.png" />
     <Content Include="wwwroot\Images\icon.png" />
+    <Content Include="wwwroot\Images\lake.jpg" />
     <Content Include="wwwroot\Images\latte.jpg" />
     <Content Include="wwwroot\Images\needle.jpg" />
     <Content Include="wwwroot\Images\nyc.jpg" />
@@ -35,6 +36,7 @@
     <Content Include="wwwroot\Images\sf.jpg" />
     <Content Include="wwwroot\Images\taiwan.jpg" />
     <Content Include="wwwroot\Images\victoria.jpg" />
+    <Content Include="wwwroot\Images\yogurt.jpg" />
     <Content Include="wwwroot\login.html" />
     <Content Include="wwwroot\picupload.html" />
     <Content Include="wwwroot\post.html" />
