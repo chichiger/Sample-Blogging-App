@@ -501,8 +501,6 @@ namespace Stateful1
                 
 
                 return answer;
-                //string output = string.Join("\n", results.ToArray());
-                //return output;
             }
         }
         
