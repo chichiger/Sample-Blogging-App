@@ -228,7 +228,6 @@ namespace Stateful1
             using (ITransaction tx = this.StateManager.CreateTransaction())
             {
 
-
                 ConditionalValue<string> userCombo = await signD.TryGetValueAsync(tx, username);
                 await tx.CommitAsync();
                 if (userCombo.HasValue == false)
