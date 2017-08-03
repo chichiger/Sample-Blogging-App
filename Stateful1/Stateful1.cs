@@ -330,8 +330,6 @@ namespace Stateful1
                 return "Logged Out";
 
             }
-            //logged[0] = "false";
-            //return "Logged Out";
         }
 
         public async Task<string> uploadImage(string URL, string tag)
