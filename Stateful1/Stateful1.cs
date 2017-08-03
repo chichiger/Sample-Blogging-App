@@ -305,14 +305,11 @@ namespace Stateful1
                 IAsyncEnumerator<KeyValuePair<string, string>> enumerator = (await hashTagDictionary.CreateEnumerableAsync(tx)).GetAsyncEnumerator();
                 while (await enumerator.MoveNextAsync(token))
                 {
-                    //Console.WriteLine(enumerator.Current.Key , enumerator.Current.Value);
                     results.Add(enumerator.Current.Key);
                     results.Add(enumerator.Current.Value);
                     results.Add("\n");
                 }
-                //long total = await MD.GetCountAsync(tx);
                 await tx.CommitAsync();
-
 
                 //return total.ToString();
                 foreach (string i in results)
