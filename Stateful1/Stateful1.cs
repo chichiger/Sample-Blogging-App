@@ -31,7 +31,6 @@ namespace Stateful1
         public Stateful1(StatefulServiceContext context)
             : base(context)
         {
-            //this.collectionsReady = false;
         }
 
 
