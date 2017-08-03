@@ -50,10 +50,7 @@ namespace Stateful1
 
 
         //}
-        public Task<string> HelloWorldAsync(String x)
-        {
-            return Task.FromResult(x);
-        }
+       
 
         public async Task<string> NewPost(String t, String tag)
 

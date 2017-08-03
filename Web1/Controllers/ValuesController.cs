@@ -33,15 +33,6 @@ namespace Web1.Controllers
         //}
 
 
-        //public async Task<String> Get(string id)
-        public async Task<string> Get(string id)
-        {
-            IMyService helloWorld = ServiceProxy.Create<IMyService>(new Uri("fabric:/Application2/Stateful1"), new ServicePartitionKey(0));
-
-            string message = await helloWorld.HelloWorldAsync(id);
-            return id;
-        }
-        
 
         // POST api/values
         [HttpPost]
