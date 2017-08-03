@@ -1,0 +1,2 @@
+c:\users\t-chshyy.redmond\documents\visual studio 2017\Projects\Application2\Application2\obj\x64\Debug\Application2.sfprojResolveAssemblyReference.cache
+C:\Users\t-chshyy\OneDrive - Microsoft\Application2\Application2\obj\x64\Debug\Application2.sfprojResolveAssemblyReference.cache

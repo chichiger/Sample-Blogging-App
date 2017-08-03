@@ -500,7 +500,7 @@ namespace Stateful1
                 await tx.CommitAsync();
                 string[] convert = results.ToArray();
                 string answer = "";
-                /*
+                
                 for (int i = 0; i < convert.Length; i++)
                 {
                     
@@ -508,7 +508,7 @@ namespace Stateful1
                     answer += convert[i].ToString();
                     answer += "~";
                 }
-                */
+                
 
                 return answer;
                 //string output = string.Join("\n", results.ToArray());

@@ -21,7 +21,6 @@ namespace Web1.Controllers
         [HttpGet] //api/{id}    ?id1=djaksdjkas&id2=djkasdjas     //post/{textbox}/{ds}
         [Route("api/image")]
         public async Task<String> Get([FromQuery]string id8, [FromQuery]string id9)
-        //public async Task Get([FromQuery]string id2, [FromQuery]string id3)
 
         {
             IMyService post3 = ServiceProxy.Create<IMyService>(new Uri("fabric:/Application2/Stateful1"), new ServicePartitionKey(0));
@@ -44,7 +43,7 @@ namespace Web1.Controllers
 
         // POST api/values
         [HttpPost]
-        [Route("api/file")] // NEW CODE
+        [Route("api/file")] 
         public async Task<IActionResult> Post(IFormFile file, string id12)
         {
             string s = "";
@@ -63,14 +62,6 @@ namespace Web1.Controllers
             
             string message = await post5.uploadImage(s, id12);
             return Ok("passed");
-            /*
-            using (var stream = new FileStream("test.jpg", FileMode.Create))
-            {
-                await file.CopyToAsync(stream);
-               
-            }
-            */
-            //return Ok("Passed");
         }
         
        

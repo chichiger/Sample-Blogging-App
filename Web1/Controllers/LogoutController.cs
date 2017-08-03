@@ -10,15 +10,12 @@ using AppCommon;
 
 namespace Web1.Controllers
 {
-    //[Route("api/[controller]")]
     public class LogoutController : Controller
     {
-        //[HttpGet("api/abc")]
-        [HttpGet] //api/{id}    ?id1=djaksdjkas&id2=djkasdjas     //post/{textbox}/{ds}
+       
+        [HttpGet] 
         [Route("api/logout")]
         public async Task<String> Get()
-        //public async Task Get([FromQuery]string id2, [FromQuery]string id3)
-
         {
             IMyService post5 = ServiceProxy.Create<IMyService>(new Uri("fabric:/Application2/Stateful1"), new ServicePartitionKey(0));
 
@@ -26,14 +23,6 @@ namespace Web1.Controllers
             return message;
         }
 
-        /*
-        public async Task<IList<string>> Get([FromQuery]string id1)
-        {
-            IMyService post2 = ServiceProxy.Create<IMyService>(new Uri("fabric:/Application2/Stateful1"), new ServicePartitionKey(0));
-            IList<string> results = await post2.getPost(id1);
-            return results;
-        }
-        */
 
         // POST api/values
         [HttpPost]

@@ -17,8 +17,6 @@ namespace Web1.Controllers
         [HttpGet]
         [Route("login")]
         public async Task<String> Get([FromQuery]string id4, [FromQuery]string id5)
-        //public async Task Get([FromQuery]string id2, [FromQuery]string id3)
-
         {
             IMyService post4 = ServiceProxy.Create<IMyService>(new Uri("fabric:/Application2/Stateful1"), new ServicePartitionKey(0));
 

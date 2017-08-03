@@ -1,0 +1,185 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <link rel="icon" href="http://localhost:8490/Images/icon.png" type="image/gif">
+    <style>
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: skyblue;
+            position: fixed;
+            top: 0;
+            width: 100%;
+        }
+
+        li {
+            float: left;
+        }
+
+            li a {
+                display: block;
+                color: white;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+            }
+
+                li a:hover {
+                    background-color: #111;
+                }
+
+        /* Full-width input fields */
+        input[type=text], input[type=password], input[type=username] {
+            width: 50%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        /* Set a style for all buttons */
+        button {
+            background-color: #ADD8E6;
+            color: black;
+            font-weight: bold;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        body {
+            background-color: LightCyan;
+            text-align: center;
+        }
+
+
+        /* Extra styles for the cancel button */
+        .cancelbtn, .signupbtn, .logoutbtn {
+            padding: 14px 20px;
+            color: white;
+            background-color: #87CEFA;
+        }
+
+        /* Float cancel and signup buttons and add an equal width */
+        .cancelbtn, .signupbtn {
+            width: 25%;
+        }
+
+        /* Add padding to container elements */
+        .container {
+            padding: 16px;
+        }
+
+        /* Clear floats */
+        .clearfix::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+
+        /* Change styles for cancel button and signup button on extra small screens */
+        @media screen and (max-width: 300px) {
+            .cancelbtn, .signupbtn {
+                width: 100%;
+            }
+        }
+
+        .header {
+            background-color: darkorchid;
+            color: white;
+        }
+
+    </style>
+</head>
+<body>
+
+    <ul>
+        <li><a href="htmlpage.html">Home</a></li>
+        <li><a href="hashtags.html">Hashtags</a></li>
+        <li style="float:right"><a class="header" href="login.html">Login/Logout</a></li>
+        <li><a href="signup.html">Signup</a></li>
+        <li><a href="post.html">New Post</a></li>
+        <li><a href="image.html">New Image</a></li>
+    </ul>
+    <p><br></p>
+    <h2>Login</h2>
+    <form>
+        <input type="button" class="logoutbtn" value="Log Out" onclick="logOut()">
+        <div class="container">
+            <p><label><b>Email</b></label></p>
+            <p><input id ="id4" type="text" placeholder="Enter email"></p>
+
+            <p><label><b>Password</b></label></p>
+            <p><input id="id5" type="password" placeholder="Enter Password"></p>
+
+
+        </div>
+
+        <script type="text/javascript">
+            function logOut() {
+               
+                var http = new XMLHttpRequest();
+                http.onreadystatechange = function () {
+                    if (http.readyState == 4) {
+                        confirm(http.responseText);
+                        window.location.href = 'http://localhost:8490/htmlpage.html';
+
+                    }
+                };
+
+                http.open("GET", 'http://localhost:8490/api/logout', true);
+                http.send();
+
+     
+            }
+        </script>
+
+
+
+        <script type="text/javascript">
+            function visitPage() {
+                var x = document.getElementById("id4").value;
+                var z = "&id5=";
+                var y = document.getElementById("id5").value;
+                // proceed only when user has entered email and password
+                if (x == "" || y == "") {
+                    alert('Please enter all fields');
+                    return false;
+                }
+                
+                var http = new XMLHttpRequest();
+                http.onreadystatechange = function () {
+                    if (http.readyState == 4) {
+                        if (http.responseText == "Username/Password incorrect. No such username exists" || http.responseText == "Wrong username/password combination") {
+                            confirm(http.responseText);
+                            window.location.href = 'http://localhost:8490/login.html';
+                        }
+                        else {
+                            confirm(http.responseText);
+                            window.location.href = 'http://localhost:8490/htmlpage.html';
+                        }
+
+                    }
+                };
+                
+                http.open("GET", 'http://localhost:8490/api/values/login?id4='.concat(x,z,y), true);
+                http.send();
+                
+                //window.location = 'http://localhost:8490/api/values/login?id4='.concat(x, z, y);
+            }
+        </script>
+
+            <div class="clearfix">
+            <input type="reset" class="cancelbtn" value="Cancel">
+            <input type="button" class="signupbtn" value="Login" onclick="visitPage()">
+        </div>
+        <p id="demo"></p>
+    </form>
+
+</body>
+</html >

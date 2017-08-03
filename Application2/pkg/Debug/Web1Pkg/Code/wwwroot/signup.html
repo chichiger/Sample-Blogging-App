@@ -1,0 +1,163 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <link rel="icon" href="http://localhost:8490/Images/icon.png">
+<style>
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: skyblue;
+        position: fixed;
+        top: 0;
+        width: 100%;
+    }
+
+    li {
+        float: left;
+    }
+
+        li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+            li a:hover {
+                background-color: #111;
+            }
+    /* Full-width input fields */
+    input[type=text], input[type=password], input[type=username] {
+        width: 50%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+    }
+
+    /* Set a style for all buttons */
+    button {
+        background-color: #ADD8E6;
+        color: black;
+        font-weight: bold;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+    }
+
+    body {
+        background-color: LightCyan;
+        text-align: center;
+    }
+
+
+    /* Extra styles for the cancel button */
+    .cancelbtn, .signupbtn {
+        padding: 14px 20px;
+        color: white;
+        background-color: #87CEFA;
+    }
+
+    /* Float cancel and signup buttons and add an equal width */
+    .cancelbtn, .signupbtn {
+        
+        width: 25%;
+    }
+
+    /* Add padding to container elements */
+    .container {
+        padding: 16px;
+    }
+
+    /* Clear floats */
+    .clearfix::after {
+        content: "";
+        clear: both;
+        display: table;
+    }
+
+    /* Change styles for cancel button and signup button on extra small screens */
+    @media screen and (max-width: 300px) {
+        .cancelbtn, .signupbtn {
+            width: 100%;
+        }
+    }
+
+    .header {
+        background-color: darkorchid;
+        color: white;
+    }
+
+</style>
+    </head>
+<body>
+    <ul>
+        <li><a href="htmlpage.html">Home</a></li>
+        <li><a href="hashtags.html">Hashtags</a></li>
+        <li style="float:right"><a class="header" href="login.html">Login/Logout</a></li>
+        <li><a href="signup.html">Signup</a></li>
+        <li><a href="post.html">New Post</a></li>
+        <li><a href="image.html">New Image</a></li>
+    </ul>
+    <p><br></p>
+
+    <h2>Signup Form</h2>
+    <form>
+        <div class="container">
+            <label><b>Email</b></label>
+            <p><b><input id="id6" type="text" placeholder="Enter Email" name="email" required></b></p>
+
+            <label><b>Password</b></label>
+            <p><b><input id="id7" type="password" placeholder="Enter a password" name="usr" required></b></p>
+  
+
+            <div class="clearfix">
+                <input type="reset" class="cancelbtn" value="Cancel">
+                <input type="button" class="signupbtn" value="Submit" onclick="visitPage()">
+            </div>
+        </div>
+
+        <script type="text/javascript">
+             function visitPage() {
+                 var x = document.getElementById("id6").value;
+                 var z = "&id7=";
+                 var y = document.getElementById("id7").value;
+                 // proceed only when user has entered email and password
+                 if (x == "" || y == "") {
+                     alert('Please enter all fields');
+                     return false;
+                 }
+                 var http = new XMLHttpRequest();
+                 http.onreadystatechange = function () {
+                     if (http.readyState == 4) {
+                         if (http.responseText == "Username already taken. Please enter a different one") {
+                             // if username is taken, send a confirm dialog box saying that and keep the user on
+                             // the signup page
+                             confirm(http.responseText);
+                             window.location.href = 'http://localhost:8490/signup.html';
+                         }
+                         else {
+                             // if successful, send confirm dialog and redirect user to login page
+                             confirm(http.responseText);
+                             window.location.href = 'http://localhost:8490/login.html';
+                         }
+
+                     }
+                 };
+
+                 http.open("GET", 'http://localhost:8490/api/signup?id6='.concat(x, z, y), true);
+                 http.send();
+
+                 //window.location = 'http://localhost:8490/api/signup?id6='.concat(x, z, y);
+             }
+        </script>
+    </form>
+
+</body>
+</html>
