@@ -55,7 +55,7 @@ namespace Stateful1
         public async Task<string> NewPost(String t, String tag)
 
         {
-            // prevent user from posting by checking if they are not logged in
+            // prevent user from posting by checking if they are logged in or not
             if (logged[0] == "false")
             {
                 return ("You must be logged in to post");
@@ -100,7 +100,6 @@ namespace Stateful1
                 IAsyncEnumerator<KeyValuePair<string, string>> enumerator = (await hashTagDictionary.CreateEnumerableAsync(tx)).GetAsyncEnumerator();
                 while (await enumerator.MoveNextAsync(token))
                 {
-                    //Console.WriteLine(enumerator.Current.Key , enumerator.Current.Value);
                     results.Add(enumerator.Current.Key);
                     results.Add(enumerator.Current.Value);
                     results.Add("\n");
@@ -133,7 +132,6 @@ namespace Stateful1
                 // crash the process
                 string causeofFailure = "Dictionary bug somewhere. Should be true";
                 Environment.FailFast(causeofFailure);
-                //return;
                 throw new Exception("Dictionary bug somewhere. Should be true");
             }
 
@@ -317,9 +315,10 @@ namespace Stateful1
             }
         }
 
+        // just like the newImage, but instead of taking in a URL of the image you convert jpg to base 64 string
         public async Task<string> uploadImage(string URL, string tag)
         {
-            // prevent user from posting by checking if they are logged in
+            // prevent user from posting if they are not logged in
             if (logged[0] == "false")
             {
                 return ("You must be logged in to post");
@@ -328,7 +327,7 @@ namespace Stateful1
             {
                 await Task.Delay(TimeSpan.FromMilliseconds(100));
             }
-            //IReliableDictionary<string, string> MD = await this.StateManager.GetOrAddAsync<IReliableDictionary<string, string>>("MD");
+  
             IReliableDictionary<string, string> MD;
             ConditionalValue<IReliableDictionary<string, string>> MDResult = await this.StateManager.TryGetAsync<IReliableDictionary<string, string>>("MD");
             if (MDResult.HasValue == true)
@@ -340,8 +339,6 @@ namespace Stateful1
                 // crash the process
                 string causeofFailure = "Dictionary bug somewhere. Should be true";
                 Environment.FailFast(causeofFailure);
-                //return;
-                //throw new Exception("Dictionary bug somewhere. Should be true");
                 return ("Dictionary bug somewhere. Should be true"); // unreachable
             }
 
@@ -349,27 +346,12 @@ namespace Stateful1
             {
 
                 IList<string> results = new List<string>();
-                //string addResult = await MD.AddOrUpdateAsync(tx, tag, t, (key, value) => t);
                 var hashTagDictionaryName = await MD.GetOrAddAsync(tx, tag, tag);
 
                 // create a dictionary for each hashtag
                 IReliableDictionary<string, string> hashTagDictionary = await this.StateManager.GetOrAddAsync<IReliableDictionary<string, string>>(hashTagDictionaryName + "Image");
-                //string addResult = await hashTagDictionary.AddOrUpdateAsync(tx, DateTime.Now.ToString(), t, (key, value) => t);
                 bool addResult = await hashTagDictionary.TryAddAsync(tx, logged[0] + " " + DateTime.UtcNow.ToString(), URL);
 
-
-                // create enumerator to get the values from the dictionary
-                IAsyncEnumerator<KeyValuePair<string, string>> enumerator = (await hashTagDictionary.CreateEnumerableAsync(tx)).GetAsyncEnumerator();
-                while (await enumerator.MoveNextAsync(token))
-                {
-                    //Console.WriteLine(enumerator.Current.Key , enumerator.Current.Value);
-                    results.Add(enumerator.Current.Key);
-                    results.Add(enumerator.Current.Value);
-                    results.Add("\n");
-                }
-                await tx.CommitAsync();
-
-                string output = string.Join(" ", results.ToArray());
                 return "Successfully posted";
 
             }
@@ -383,7 +365,6 @@ namespace Stateful1
             {
                 await Task.Delay(TimeSpan.FromMilliseconds(100));
             }
-            //IReliableDictionary<string, string> MD = await this.StateManager.GetOrAddAsync<IReliableDictionary<string, string>>("MD");
             IReliableDictionary<string, string> MD;
             ConditionalValue<IReliableDictionary<string, string>> MDResult = await this.StateManager.TryGetAsync<IReliableDictionary<string, string>>("MD");
             if (MDResult.HasValue == true)
@@ -395,8 +376,6 @@ namespace Stateful1
                 // crash the process
                 string causeofFailure = "Dictionary bug somewhere. Should be true";
                 Environment.FailFast(causeofFailure);
-                //return;
-                //throw new Exception("Dictionary bug somewhere. Should be true");
                 return ("Dictionary bug somewhere. Should be true"); // unreachable
             }
 
@@ -405,8 +384,6 @@ namespace Stateful1
 
                 IList<string> results = new List<string>();
                 
-
-
                 // create enumerator to get the values from the dictionary
                 IAsyncEnumerator<KeyValuePair<string, string>> enumerator = (await MD.CreateEnumerableAsync(tx)).GetAsyncEnumerator();
                 while (await enumerator.MoveNextAsync(token))
@@ -414,7 +391,6 @@ namespace Stateful1
                     //Console.WriteLine(enumerator.Current.Key , enumerator.Current.Value);
                     results.Add(enumerator.Current.Key);
                 }
-                //long total = await MD.GetCountAsync(tx);
                 await tx.CommitAsync();
                 string[] options = results.ToArray();
                 results1.Clear();
@@ -427,8 +403,6 @@ namespace Stateful1
                     
                 }
                 string output = string.Join(" , ", results1.ToArray());
-                //string output = string.Join(" ", results.ToArray());
-                //return output;
                 return output;
 
             }
