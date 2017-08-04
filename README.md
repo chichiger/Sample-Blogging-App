@@ -16,10 +16,10 @@ This sample application can be built and deployed immediately using Visual Studi
 
 # About the Sample App
 This sample app contains two services and demonstrates how to use key parts of Service Fabric
-## Front End Stateless Service
+## Stateless Frontend Service
   ### Key Concepts
   * Service Proxy
-## Back End Stateful Service
+## Stateful Backend Service
   ### Key Concepts
   * Reliable Collections
   * MVC Controllers
