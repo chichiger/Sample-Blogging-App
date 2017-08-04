@@ -27,4 +27,5 @@ This sample app contains two services and demonstrates how to use key parts of S
 #### Flowchart of the stateless front end interacting with the stateful back end
 ![Imgur Image](http://i.imgur.com/Yd3aceo.png)
 
-This project has adopted the Microsoft Open Source Code of Conduct. For more information see the Code of Conduct FAQ or contact opencode@microsoft.com with any additional questions or comments.
+---
+*This project has adopted the Microsoft Open Source Code of Conduct. For more information see the Code of Conduct FAQ or contact opencode@microsoft.com with any additional questions or comments.*
