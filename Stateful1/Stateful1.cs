@@ -253,11 +253,17 @@ namespace Stateful1
             }
         }
 
+        /// <summary>
+        /// In NewImage, the parameters are the URL of the image link and the hashtag associated
+        /// with this image. These two values are passed from the stateless front end to the stateful
+        /// back end. The Master Dictionary will first check if this hashtag exists, and if it does, then you
+        /// get the dictionary. If it doesn't exist, you create it. Then, inside that dictionary, you add
+        /// the image URL. 
+        /// </summary>
         public async Task<string> NewImage(String URL, String tag)
 
-
         {
-            // prevent user from posting by checking if they are logged in
+            // prevent user from posting if they are not logged in
             if (logged[0] == "false")
             {
                 return ("You must be logged in to post");
@@ -266,7 +272,7 @@ namespace Stateful1
             {
                 await Task.Delay(TimeSpan.FromMilliseconds(100));
             }
-            //IReliableDictionary<string, string> MD = await this.StateManager.GetOrAddAsync<IReliableDictionary<string, string>>("MD");
+        
             IReliableDictionary<string, string> MD;
             ConditionalValue<IReliableDictionary<string, string>> MDResult = await this.StateManager.TryGetAsync<IReliableDictionary<string, string>>("MD");
             if (MDResult.HasValue == true)
@@ -278,8 +284,6 @@ namespace Stateful1
                 // crash the process
                 string causeofFailure = "Dictionary bug somewhere. Should be true";
                 Environment.FailFast(causeofFailure);
-                //return;
-                //throw new Exception("Dictionary bug somewhere. Should be true");
                 return ("Dictionary bug somewhere. Should be true"); // unreachable
             }
 
@@ -287,32 +291,14 @@ namespace Stateful1
             {
 
                 IList<string> results = new List<string>();
-                //string addResult = await MD.AddOrUpdateAsync(tx, tag, t, (key, value) => t);
                 var hashTagDictionaryName = await MD.GetOrAddAsync(tx, tag, tag);
 
                 // create a dictionary for each hashtag
                 IReliableDictionary<string, string> hashTagDictionary = await this.StateManager.GetOrAddAsync<IReliableDictionary<string, string>>(hashTagDictionaryName);
-                //string addResult = await hashTagDictionary.AddOrUpdateAsync(tx, DateTime.Now.ToString(), t, (key, value) => t);
                 bool addResult = await hashTagDictionary.TryAddAsync(tx, logged[0] + " "+  DateTime.UtcNow.ToString(), URL);
 
-
-                // create enumerator to get the values from the dictionary
-                IAsyncEnumerator<KeyValuePair<string, string>> enumerator = (await hashTagDictionary.CreateEnumerableAsync(tx)).GetAsyncEnumerator();
-                while (await enumerator.MoveNextAsync(token))
-                {
-                    results.Add(enumerator.Current.Key);
-                    results.Add(enumerator.Current.Value);
-                    results.Add("\n");
-                }
                 await tx.CommitAsync();
 
-                //return total.ToString();
-                foreach (string i in results)
-                {
-                    Console.WriteLine("{0}\t", i);
-                }
-                string output = string.Join(" ", results.ToArray());
-                //return output;
                 return "Successfully posted";
             }
 
@@ -381,7 +367,6 @@ namespace Stateful1
                     results.Add(enumerator.Current.Value);
                     results.Add("\n");
                 }
-                //long total = await MD.GetCountAsync(tx);
                 await tx.CommitAsync();
 
                 string output = string.Join(" ", results.ToArray());
@@ -454,7 +439,6 @@ namespace Stateful1
         public async Task<string> getImage(string tag)
         {
             IReliableDictionary<string, string> MD;
-            //IReliableDictionary<string, string> hashTagDictionary;
             IList<string> results = new List<string>();
             ConditionalValue<IReliableDictionary<string, string>> MDResult = await this.StateManager.TryGetAsync<IReliableDictionary<string, string>>("MD");
             if (MDResult.HasValue == true)
@@ -466,7 +450,6 @@ namespace Stateful1
                 // crash the process
                 string causeofFailure = "Dictionary bug somewhere. Should be true";
                 Environment.FailFast(causeofFailure);
-                //return;
                 throw new Exception("Dictionary bug somewhere. Should be true");
             }
 
@@ -490,7 +473,6 @@ namespace Stateful1
 
                     results.Add(enumerator.Current.Key);
                     results.Add(enumerator.Current.Value);
-                    //results.Add("\n");
                 }
 
                 await tx.CommitAsync();
