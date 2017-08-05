@@ -1,33 +1,35 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Fabric;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using Microsoft.ServiceFabric.Data.Collections;
-using Microsoft.ServiceFabric.Services.Communication.Runtime;
-using Microsoft.ServiceFabric.Services.Runtime;
-using Microsoft.ServiceFabric.Services.Remoting.Runtime;
-using Microsoft.ServiceFabric.Services.Remoting.FabricTransport.Runtime;
-using Microsoft.ServiceFabric.Services.Remoting;
-using AppCommon;
-using Microsoft.ServiceFabric.Data;
-using System.Collections;
+﻿// ------------------------------------------------------------
+//  Copyright (c) Microsoft Corporation.  All rights reserved.
+//  Licensed under the MIT License (MIT). See License.txt in the repo root for license information.
+// ------------------------------------------------------------
 
 namespace Stateful1
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Fabric;
+    using System.Linq;
+    using System.Threading;
+    using System.Threading.Tasks;
+    using AppCommon;
+    using Microsoft.ServiceFabric.Data;
+    using Microsoft.ServiceFabric.Data.Collections;
+    using Microsoft.ServiceFabric.Services.Communication.Runtime;
+    using Microsoft.ServiceFabric.Services.Remoting.FabricTransport.Runtime;
+    using Microsoft.ServiceFabric.Services.Runtime;
+
     /// <summary>
     /// An instance of this class is created for each service replica by the Service Fabric runtime.
     /// </summary>
     /// 
-
     internal sealed class Stateful1 : StatefulService, IMyService
     {
-        private bool collectionsReady; // use this when primary is called
         public string loggedIn = "false";
-        string[] logged = new string[] { "false" };
+        private bool collectionsReady; // use this when primary is called
+        string[] logged = new string[] {"false"};
         List<string> results1 = new List<string>();
         private CancellationToken token;
+
         public Stateful1(StatefulServiceContext context)
             : base(context)
         {
@@ -42,21 +44,17 @@ namespace Stateful1
         /// </remarks>
         /// <returns>A collection of listeners.</returns>
 
-
         //protected override IEnumerable<ServiceReplicaListener> CreateServiceReplicaListeners()
         //{
         //    //OLD CODE
         //    //return new ServiceReplicaListener[0];
 
-
         //}
-
-
         public async Task<string> NewPost(String t, String tag)
 
         {
             // prevent user from posting by checking if they are logged in or not
-            if (logged[0] == "false")
+            if (this.logged[0] == "false")
             {
                 return ("You must be logged in to post");
             }
@@ -89,16 +87,17 @@ namespace Stateful1
 
                 IList<string> results = new List<string>();
                 //string addResult = await MD.AddOrUpdateAsync(tx, tag, t, (key, value) => t);
-                var hashTagDictionaryName = await MD.GetOrAddAsync(tx, tag, tag);
+                string hashTagDictionaryName = await MD.GetOrAddAsync(tx, tag, tag);
 
                 // create a dictionary for each hashtag
-                IReliableDictionary<string, string> hashTagDictionary = await this.StateManager.GetOrAddAsync<IReliableDictionary<string, string>>(hashTagDictionaryName);
+                IReliableDictionary<string, string> hashTagDictionary =
+                    await this.StateManager.GetOrAddAsync<IReliableDictionary<string, string>>(hashTagDictionaryName);
                 //string addResult = await hashTagDictionary.AddOrUpdateAsync(tx, DateTime.Now.ToString(), t, (key, value) => t);
-                bool addResult = await hashTagDictionary.TryAddAsync(tx, logged[0] + " " + DateTime.UtcNow.ToString(), t);
+                bool addResult = await hashTagDictionary.TryAddAsync(tx, this.logged[0] + " " + DateTime.UtcNow.ToString(), t);
 
                 // create enumerator to get the values from the dictionary
                 IAsyncEnumerator<KeyValuePair<string, string>> enumerator = (await hashTagDictionary.CreateEnumerableAsync(tx)).GetAsyncEnumerator();
-                while (await enumerator.MoveNextAsync(token))
+                while (await enumerator.MoveNextAsync(this.token))
                 {
                     results.Add(enumerator.Current.Key);
                     results.Add(enumerator.Current.Value);
@@ -113,9 +112,7 @@ namespace Stateful1
                 }
                 string output = string.Join(" ", results.ToArray());
                 return "Successfully posted";
-
             }
-
         }
 
         public async Task<string> getPost(string tag)
@@ -137,22 +134,21 @@ namespace Stateful1
 
             using (ITransaction tx = this.StateManager.CreateTransaction())
             {
-
                 ConditionalValue<string> HD = await MD.TryGetValueAsync(tx, tag);
                 if (HD.HasValue == false)
                 {
                     return "No posts with this hashtag";
                 }
-                var hashTagDictionaryName = await MD.GetOrAddAsync(tx, tag, tag);
+                string hashTagDictionaryName = await MD.GetOrAddAsync(tx, tag, tag);
                 //ConditionalValue<IReliableDictionary<string, string>> HD = await this.StateManager.TryGetAsync<IReliableDictionary<string, string>> (tag);
 
-                IReliableDictionary<string, string> hashTagDictionary = await this.StateManager.GetOrAddAsync<IReliableDictionary<string, string>>(hashTagDictionaryName);
+                IReliableDictionary<string, string> hashTagDictionary =
+                    await this.StateManager.GetOrAddAsync<IReliableDictionary<string, string>>(hashTagDictionaryName);
 
                 //IReliableDictionary<string, string> hashTagDictionary = await this.StateManager.GetOrAddAsync<IReliableDictionary<string, string>>(hashTagDictionaryName);
                 IAsyncEnumerator<KeyValuePair<string, string>> enumerator = (await hashTagDictionary.CreateEnumerableAsync(tx)).GetAsyncEnumerator();
-                while (await enumerator.MoveNextAsync(token))
+                while (await enumerator.MoveNextAsync(this.token))
                 {
-
                     results.Add(enumerator.Current.Key);
                     results.Add(enumerator.Current.Value);
                     //results.Add("\n");
@@ -185,7 +181,6 @@ namespace Stateful1
         public async Task<string> signUp(String username, String password)
 
         {
-
             while (!this.collectionsReady)
             {
                 await Task.Delay(TimeSpan.FromMilliseconds(100));
@@ -194,7 +189,6 @@ namespace Stateful1
 
             using (ITransaction tx = this.StateManager.CreateTransaction())
             {
-
                 IList<string> results = new List<string>();
                 bool addUser = await signD.TryAddAsync(tx, username, password);
 
@@ -205,7 +199,7 @@ namespace Stateful1
 
                 // create enumerator to get the values from the dictionary
                 IAsyncEnumerator<KeyValuePair<string, string>> enumerator = (await signD.CreateEnumerableAsync(tx)).GetAsyncEnumerator();
-                while (await enumerator.MoveNextAsync(token))
+                while (await enumerator.MoveNextAsync(this.token))
                 {
                     results.Add(enumerator.Current.Key);
                     results.Add(enumerator.Current.Value);
@@ -214,7 +208,6 @@ namespace Stateful1
                 await tx.CommitAsync();
                 return "You are now signed up";
             }
-
         }
 
         public async Task<string> logIn(string username, string password)
@@ -225,7 +218,6 @@ namespace Stateful1
 
             using (ITransaction tx = this.StateManager.CreateTransaction())
             {
-
                 ConditionalValue<string> userCombo = await signD.TryGetValueAsync(tx, username);
                 await tx.CommitAsync();
                 if (userCombo.HasValue == false)
@@ -234,20 +226,17 @@ namespace Stateful1
                 }
                 else
                 {
-
                     if (userCombo.Value == password)
                     {
-                        loggedIn = username;
-                        logged[0] = username;
+                        this.loggedIn = username;
+                        this.logged[0] = username;
                         return "Login successful";
-
                     }
                     else
                     {
                         return "Wrong username/password combination";
                     }
                 }
-
             }
         }
 
@@ -262,7 +251,7 @@ namespace Stateful1
 
         {
             // prevent user from posting if they are not logged in
-            if (logged[0] == "false")
+            if (this.logged[0] == "false")
             {
                 return ("You must be logged in to post");
             }
@@ -287,31 +276,27 @@ namespace Stateful1
 
             using (ITransaction tx = this.StateManager.CreateTransaction())
             {
-
                 IList<string> results = new List<string>();
-                var hashTagDictionaryName = await MD.GetOrAddAsync(tx, tag, tag);
+                string hashTagDictionaryName = await MD.GetOrAddAsync(tx, tag, tag);
 
                 // create a dictionary for each hashtag
-                IReliableDictionary<string, string> hashTagDictionary = await this.StateManager.GetOrAddAsync<IReliableDictionary<string, string>>(hashTagDictionaryName);
-                bool addResult = await hashTagDictionary.TryAddAsync(tx, logged[0] + " " + DateTime.UtcNow.ToString(), URL);
+                IReliableDictionary<string, string> hashTagDictionary =
+                    await this.StateManager.GetOrAddAsync<IReliableDictionary<string, string>>(hashTagDictionaryName);
+                bool addResult = await hashTagDictionary.TryAddAsync(tx, this.logged[0] + " " + DateTime.UtcNow.ToString(), URL);
 
                 await tx.CommitAsync();
 
                 return "Successfully posted";
             }
-
         }
 
         public async Task<string> logOut()
         {
-
             using (ITransaction tx = this.StateManager.CreateTransaction())
             {
-
                 await tx.CommitAsync();
-                logged[0] = "false";
+                this.logged[0] = "false";
                 return "Logged Out";
-
             }
         }
 
@@ -319,7 +304,7 @@ namespace Stateful1
         public async Task<string> uploadImage(string URL, string tag)
         {
             // prevent user from posting if they are not logged in
-            if (logged[0] == "false")
+            if (this.logged[0] == "false")
             {
                 return ("You must be logged in to post");
             }
@@ -344,23 +329,20 @@ namespace Stateful1
 
             using (ITransaction tx = this.StateManager.CreateTransaction())
             {
-
                 IList<string> results = new List<string>();
-                var hashTagDictionaryName = await MD.GetOrAddAsync(tx, tag, tag);
+                string hashTagDictionaryName = await MD.GetOrAddAsync(tx, tag, tag);
 
                 // create a dictionary for each hashtag
-                IReliableDictionary<string, string> hashTagDictionary = await this.StateManager.GetOrAddAsync<IReliableDictionary<string, string>>(hashTagDictionaryName + "Image");
-                bool addResult = await hashTagDictionary.TryAddAsync(tx, logged[0] + " " + DateTime.UtcNow.ToString(), URL);
+                IReliableDictionary<string, string> hashTagDictionary =
+                    await this.StateManager.GetOrAddAsync<IReliableDictionary<string, string>>(hashTagDictionaryName + "Image");
+                bool addResult = await hashTagDictionary.TryAddAsync(tx, this.logged[0] + " " + DateTime.UtcNow.ToString(), URL);
                 await tx.CommitAsync();
                 return "Successfully posted";
-
             }
-
         }
 
         public async Task<string> searchUp(string name)
         {
-
             while (!this.collectionsReady)
             {
                 await Task.Delay(TimeSpan.FromMilliseconds(100));
@@ -381,32 +363,28 @@ namespace Stateful1
 
             using (ITransaction tx = this.StateManager.CreateTransaction())
             {
-
                 IList<string> results = new List<string>();
 
                 // create enumerator to get the values from the dictionary
                 IAsyncEnumerator<KeyValuePair<string, string>> enumerator = (await MD.CreateEnumerableAsync(tx)).GetAsyncEnumerator();
-                while (await enumerator.MoveNextAsync(token))
+                while (await enumerator.MoveNextAsync(this.token))
                 {
                     //Console.WriteLine(enumerator.Current.Key , enumerator.Current.Value);
                     results.Add(enumerator.Current.Key);
                 }
                 await tx.CommitAsync();
                 string[] options = results.ToArray();
-                results1.Clear();
+                this.results1.Clear();
                 foreach (string i in options)
                 {
                     if (i.StartsWith(name))
                     {
-                        results1.Add(i);
+                        this.results1.Add(i);
                     }
-
                 }
-                string output = string.Join(" , ", results1.ToArray());
+                string output = string.Join(" , ", this.results1.ToArray());
                 return output;
-
             }
-
         }
 
 
@@ -429,22 +407,21 @@ namespace Stateful1
 
             using (ITransaction tx = this.StateManager.CreateTransaction())
             {
-
                 ConditionalValue<string> HD = await MD.TryGetValueAsync(tx, tag);
                 if (HD.HasValue == false)
                 {
                     return "No posts with this hashtag";
                 }
-                var hashTagDictionaryName = await MD.GetOrAddAsync(tx, tag, tag);
+                string hashTagDictionaryName = await MD.GetOrAddAsync(tx, tag, tag);
                 //ConditionalValue<IReliableDictionary<string, string>> HD = await this.StateManager.TryGetAsync<IReliableDictionary<string, string>> (tag + "Image");
 
-                IReliableDictionary<string, string> hashTagDictionary = await this.StateManager.GetOrAddAsync<IReliableDictionary<string, string>>(hashTagDictionaryName + "Image");
+                IReliableDictionary<string, string> hashTagDictionary =
+                    await this.StateManager.GetOrAddAsync<IReliableDictionary<string, string>>(hashTagDictionaryName + "Image");
 
                 //IReliableDictionary<string, string> hashTagDictionary = await this.StateManager.GetOrAddAsync<IReliableDictionary<string, string>>(hashTagDictionaryName);
                 IAsyncEnumerator<KeyValuePair<string, string>> enumerator = (await hashTagDictionary.CreateEnumerableAsync(tx)).GetAsyncEnumerator();
-                while (await enumerator.MoveNextAsync(token))
+                while (await enumerator.MoveNextAsync(this.token))
                 {
-
                     results.Add(enumerator.Current.Key);
                     results.Add(enumerator.Current.Value);
                 }
@@ -455,8 +432,6 @@ namespace Stateful1
 
                 for (int i = 0; i < convert.Length; i++)
                 {
-
-
                     answer += convert[i].ToString();
                     answer += "~";
                 }
@@ -469,13 +444,7 @@ namespace Stateful1
 
         protected override IEnumerable<ServiceReplicaListener> CreateServiceReplicaListeners()
         {
-            return new[] { new ServiceReplicaListener(this.CreateServiceCommunicationListener, name: "ServiceEndpoint") };
-        }
-
-        private ICommunicationListener CreateServiceCommunicationListener(ServiceContext context)
-        {
-            return new FabricTransportServiceRemotingListener(context, this);
-
+            return new[] {new ServiceReplicaListener(this.CreateServiceCommunicationListener, name: "ServiceEndpoint")};
         }
 
         /// <summary>
@@ -490,17 +459,19 @@ namespace Stateful1
             await this.StateManager.GetOrAddAsync<IReliableDictionary<string, string>>("MD");
             this.collectionsReady = true;
 
-            var myDictionary = await this.StateManager.GetOrAddAsync<IReliableDictionary<string, long>>("myDictionary");
+            IReliableDictionary<string, long> myDictionary = await this.StateManager.GetOrAddAsync<IReliableDictionary<string, long>>("myDictionary");
 
             while (true)
             {
                 cancellationToken.ThrowIfCancellationRequested();
 
-                using (var tx = this.StateManager.CreateTransaction())
+                using (ITransaction tx = this.StateManager.CreateTransaction())
                 {
-                    var result = await myDictionary.TryGetValueAsync(tx, "Counter");
+                    ConditionalValue<long> result = await myDictionary.TryGetValueAsync(tx, "Counter");
 
-                    ServiceEventSource.Current.ServiceMessage(this.Context, "Current Counter Value: {0}",
+                    ServiceEventSource.Current.ServiceMessage(
+                        this.Context,
+                        "Current Counter Value: {0}",
                         result.HasValue ? result.Value.ToString() : "Value does not exist.");
 
                     await myDictionary.AddOrUpdateAsync(tx, "Counter", 0, (key, value) => ++value);
@@ -514,6 +485,9 @@ namespace Stateful1
             }
         }
 
-
+        private ICommunicationListener CreateServiceCommunicationListener(ServiceContext context)
+        {
+            return new FabricTransportServiceRemotingListener(context, this);
+        }
     }
 }
