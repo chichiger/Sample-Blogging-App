@@ -24,7 +24,7 @@ namespace Stateful1
     /// 
     internal sealed class Stateful1 : StatefulService, IMyService
     {
-        public string loggedIn = "false";
+        public string LoggedIn = "false";
         private bool collectionsReady; // use this when primary is called
         string[] logged = new string[] {"false"};
         List<string> results1 = new List<string>();
@@ -228,7 +228,7 @@ namespace Stateful1
                 {
                     if (userCombo.Value == password)
                     {
-                        this.loggedIn = username;
+                        this.LoggedIn = username;
                         this.logged[0] = username;
                         return "Login successful";
                     }
