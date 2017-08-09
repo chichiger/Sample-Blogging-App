@@ -41,6 +41,7 @@
     <Content Include="wwwroot\picupload.html" />
     <Content Include="wwwroot\post.html" />
     <Content Include="wwwroot\signup.html" />
+    <Content Include="wwwroot\test.html" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.0.0" />
@@ -61,6 +62,7 @@
     <PackageReference Include="Microsoft.ServiceFabric.Data" Version="2.6.220" />
     <PackageReference Include="Microsoft.ServiceFabric.Services" Version="2.6.220" />
     <PackageReference Include="Microsoft.ServiceFabric.Services.Remoting" Version="2.6.220" />
+    <PackageReference Include="Microsoft.VisualStudio.UnitTesting" Version="11.0.50727.1" />
     <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="1.1.2" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="1.1.1" />
     <PackageReference Include="System.IO.Abstractions" Version="2.0.0.144" />

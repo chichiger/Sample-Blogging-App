@@ -116,7 +116,7 @@
             <p> Enter Text </p>
             <textarea rows="4" cols="55" id="id2" placeholder="Text"></textarea>
             <p> Enter Hashtag </p>
-            <textarea rows="2" cols="55" id="id3" placeholder="Enter Hashtag"></textarea>
+            <textarea rows="2" cols="55" id="id3" placeholder="Enter Hashtags separated by commas(no space)"></textarea>
                       
         </div>
 
@@ -127,9 +127,9 @@
                 var z = "&id3=";
                 var y = document.getElementById("id3").value;
                 // proceed only when user has entered a hashtag
-               if (y == "" || x == "")
+               if (y === "" || x === "")
                {
-                   alert('Please enter a hashtag');
+                   alert('Please fill all required fields');
                    return false;
                 }
                 

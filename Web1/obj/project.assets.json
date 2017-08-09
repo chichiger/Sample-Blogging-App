@@ -1655,6 +1655,15 @@
           "lib/net45/Microsoft.ServiceFabric.Services.Remoting.dll": {}
         }
       },
+      "Microsoft.VisualStudio.UnitTesting/11.0.50727.1": {
+        "type": "package",
+        "compile": {
+          "lib/net45/Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll": {}
+        },
+        "runtime": {
+          "lib/net45/Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll": {}
+        }
+      },
       "Microsoft.VisualStudio.Web.BrowserLink/1.1.2": {
         "type": "package",
         "dependencies": {
@@ -4012,6 +4021,15 @@
           "lib/net45/Microsoft.ServiceFabric.Services.Remoting.dll": {}
         }
       },
+      "Microsoft.VisualStudio.UnitTesting/11.0.50727.1": {
+        "type": "package",
+        "compile": {
+          "lib/net45/Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll": {}
+        },
+        "runtime": {
+          "lib/net45/Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll": {}
+        }
+      },
       "Microsoft.VisualStudio.Web.BrowserLink/1.1.2": {
         "type": "package",
         "dependencies": {
@@ -6363,6 +6381,21 @@
         "lib/net45/Microsoft.ServiceFabric.Services.Remoting.xml",
         "microsoft.servicefabric.services.remoting.2.6.220.nupkg.sha512",
         "microsoft.servicefabric.services.remoting.nuspec"
+      ]
+    },
+    "Microsoft.VisualStudio.UnitTesting/11.0.50727.1": {
+      "sha512": "DoqQ6Zl7GcytRa1isWv20MyV1znFRDje6k/y3edbew3Qx/Z1r5Cf6rBktD7lGxN97d2VVC5RzdFHw+dci9lsMw==",
+      "type": "package",
+      "path": "microsoft.visualstudio.unittesting/11.0.50727.1",
+      "files": [
+        "LICENSE.txt",
+        "THIRD-PARTY-LICENSE.txt",
+        "lib/net45/Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll",
+        "lib/net45/Microsoft.VisualStudio.QualityTools.UnitTestFramework.xml",
+        "microsoft.visualstudio.unittesting.11.0.50727.1.nupkg.sha512",
+        "microsoft.visualstudio.unittesting.nuspec",
+        "tools/net45/MSTest.exe",
+        "tools/net45/MSTest.exe.config"
       ]
     },
     "Microsoft.VisualStudio.Web.BrowserLink/1.1.2": {
@@ -9128,6 +9161,7 @@
       "Microsoft.ServiceFabric.Data >= 2.6.220",
       "Microsoft.ServiceFabric.Services >= 2.6.220",
       "Microsoft.ServiceFabric.Services.Remoting >= 2.6.220",
+      "Microsoft.VisualStudio.UnitTesting >= 11.0.50727.1",
       "Microsoft.VisualStudio.Web.BrowserLink >= 1.1.2",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 1.1.1",
       "System.IO.Abstractions >= 2.0.0.144",
@@ -9205,6 +9239,10 @@
           "Microsoft.VisualStudio.Web.BrowserLink": {
             "target": "Package",
             "version": "1.1.2"
+          },
+          "Microsoft.VisualStudio.UnitTesting": {
+            "target": "Package",
+            "version": "11.0.50727.1"
           },
           "Microsoft.AspNet.WebPages": {
             "target": "Package",

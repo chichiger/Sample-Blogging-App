@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETFramework,Version=v4.5.2/win7-x64",
-    "signature": "057c342e1ed17eb21849a672dc1cb270a02a5349"
+    "signature": "c060ac932bedd846575aa785819c5e5607f02997"
   },
   "compilationOptions": {
     "defines": [
@@ -42,6 +42,7 @@
           "Microsoft.ServiceFabric.Data": "2.6.220",
           "Microsoft.ServiceFabric.Services": "2.6.220",
           "Microsoft.ServiceFabric.Services.Remoting": "2.6.220",
+          "Microsoft.VisualStudio.UnitTesting": "11.0.50727.1",
           "Microsoft.VisualStudio.Web.BrowserLink": "1.1.2",
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "1.1.1",
           "System.IO.Abstractions": "2.0.0.144",
@@ -1519,6 +1520,11 @@
           "lib/net45/Microsoft.ServiceFabric.Services.Remoting.dll": {}
         }
       },
+      "microsoft.visualstudio.unittesting/11.0.50727.1": {
+        "compile": {
+          "lib/net45/Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll": {}
+        }
+      },
       "microsoft.visualstudio.web.browserlink/1.1.2": {
         "dependencies": {
           "Microsoft.AspNetCore.Hosting.Abstractions": "1.1.2",
@@ -1807,6 +1813,7 @@
           "Microsoft.ServiceFabric.Data": "2.6.220",
           "Microsoft.ServiceFabric.Services": "2.6.220",
           "Microsoft.ServiceFabric.Services.Remoting": "2.6.220",
+          "Microsoft.VisualStudio.UnitTesting": "11.0.50727.1",
           "Microsoft.VisualStudio.Web.BrowserLink": "1.1.2",
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "1.1.1",
           "System.IO.Abstractions": "2.0.0.144",
@@ -2932,6 +2939,11 @@
           "lib/net45/Microsoft.ServiceFabric.Services.Remoting.dll": {}
         }
       },
+      "microsoft.visualstudio.unittesting/11.0.50727.1": {
+        "runtime": {
+          "lib/net45/Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll": {}
+        }
+      },
       "microsoft.visualstudio.web.browserlink/1.1.2": {
         "dependencies": {
           "Microsoft.AspNetCore.Hosting.Abstractions": "1.1.2",
@@ -3988,6 +4000,13 @@
       "sha512": "sha512-s/1MgDXEK5kPm7VDN64Pjb9uXJlmcek5uDeu1XLwm/2MkgQArx7I4TMG53GGf7laK2Z/KFsVBTHlSYH7O+Yj3g==",
       "path": "microsoft.servicefabric.services.remoting/2.6.220",
       "hashPath": "microsoft.servicefabric.services.remoting.2.6.220.nupkg.sha512"
+    },
+    "microsoft.visualstudio.unittesting/11.0.50727.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-DoqQ6Zl7GcytRa1isWv20MyV1znFRDje6k/y3edbew3Qx/Z1r5Cf6rBktD7lGxN97d2VVC5RzdFHw+dci9lsMw==",
+      "path": "microsoft.visualstudio.unittesting/11.0.50727.1",
+      "hashPath": "microsoft.visualstudio.unittesting.11.0.50727.1.nupkg.sha512"
     },
     "microsoft.visualstudio.web.browserlink/1.1.2": {
       "type": "package",

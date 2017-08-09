@@ -200,12 +200,14 @@
                                     n.setAttribute("src", words[i]);
                                     document.getElementById("demo").innerHTML += "<br>";
                                     document.getElementById("demo").appendChild(n);
+                                    document.getElementById("demo").innerHTML += "<br>"; // new
                                 }
 
                                 else {
                                     document.getElementById("demo").innerHTML += "<br>";
                                     document.getElementById("demo").innerHTML += words[i];
                                     document.getElementById("demo").innerHTML += " ";
+                                    document.getElementById("demo").innerHTML += "<br>"; // new
                                 }
 
                             }
@@ -215,11 +217,13 @@
                                     n.setAttribute("src", words[i]);
                                     document.getElementById("demo").innerHTML += "<br>";
                                     document.getElementById("demo").appendChild(n);
+                                    document.getElementById("demo").innerHTML += "<br>"; // new
                                 }
 
                                 else {
                                     document.getElementById("demo").innerHTML += words[i];
                                     document.getElementById("demo").innerHTML += " ";
+                                    document.getElementById("demo").innerHTML += "<br>"; // new
                                 }
                             }
 
@@ -250,6 +254,7 @@
                                 n.setAttribute("src", "data:image/jpg;base64," + words[i]);
                                 document.getElementById("demo").innerHTML += "<br>";
                                 document.getElementById("demo").appendChild(n);
+                                document.getElementById("demo").innerHTML += "<br>"; // new
                                
                             }
                             else {

@@ -1,0 +1,153 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <link rel="icon" href="http://localhost:8490/Images/icon.png" type="image/gif">
+    <script src="jquery-3.2.1.min.js"></script>
+    <style>
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: skyblue;
+            position: fixed;
+            top: 0;
+            width: 100%;
+        }
+
+        li {
+            float: left;
+        }
+
+        li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        li a:hover {
+            background-color: #111;
+        }
+
+       
+        /* Set a style for all buttons */
+        button {
+            background-color: #ADD8E6;
+            color: black;
+            font-weight: bold;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        body {
+            background-color: LightCyan;
+            text-align: center;
+        }
+
+
+        /* Extra styles for the cancel button */
+        .cancelbtn, .signupbtn, .logoutbtn {
+            padding: 14px 20px;
+            color: white;
+            background-color: #87CEFA;
+        }
+
+        /* Float cancel and signup buttons and add an equal width */
+        .cancelbtn, .signupbtn {
+            width: 25%;
+        }
+
+        /* Add padding to container elements */
+        .container {
+            padding: 16px;
+        }
+
+        /* Clear floats */
+        .clearfix::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+
+        /* Change styles for cancel button and signup button on extra small screens */
+        @media screen and (max-width: 300px) {
+            .cancelbtn, .signupbtn {
+                width: 100%;
+            }
+        }
+
+        .header {
+            background-color: darkorchid;
+            color: white;
+        }
+
+        .newposts {
+            font-family: 'Comic Sans MS';
+            font-size: 25px;
+            color: rebeccapurple;
+            text-align: center;
+            
+        }
+
+    </style>
+</head>
+<body>
+
+<ul>
+    <li><a href="htmlpage.html">Home</a></li>
+    <li><a href="hashtags.html">Hashtags</a></li>
+    <li style="float:right"><a class="header" href="login.html">Login/Logout</a></li>
+    <li><a href="signup.html">Signup</a></li>
+    <li><a href="post.html">New Post</a></li>
+    <li><a href="image.html">New Image</a></li>
+</ul>
+<p><br></p>
+<h2>Test</h2>
+    
+<script type="text/javascript">
+    function visitPage() {
+        function test1() {
+            var x = "New";
+            var z = "&id5=";
+            var y = "Name";
+
+                
+            var http = new XMLHttpRequest();
+            http.onreadystatechange = function () {
+                if (http.readyState == 4) {
+                    if (http.responseText === "Username/Password incorrect. No such username exists" || http.responseText == "Wrong username/password combination") {
+                        document.getElementById("demo").innerHTML += "Testing Logging in with username that doesn't exist";
+                        document.getElementById("demo").innerHTML += "<br>";
+                        document.getElementById("demo").innerHTML += "Test Passed";
+                    }
+                    else {
+                        document.getElementById("demo").innerHTML += "Test Logging in with username that doesn't exist";
+                        document.getElementById("demo").innerHTML += "<br>";
+                        document.getElementById("demo").innerHTML += "Test Failed";
+                    }
+
+                }
+            };
+                
+            http.open("GET", 'http://localhost:8490/api/values/login?id4='.concat(x,z,y), true);
+            http.send();
+        }
+
+        test1();
+
+    }
+</script>
+
+    <div class="clearfix">
+        <input type="button" class="signupbtn" value="Test" onclick="visitPage()">
+    </div>
+
+<p class="newposts" id="demo"></p>
+
+</body>
+</html >

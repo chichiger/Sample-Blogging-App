@@ -50,3 +50,5 @@ C:\Users\t-chshyy\OneDrive - Microsoft\Application2\Stateful1\bin\x64\Debug\Syst
 C:\Users\t-chshyy\OneDrive - Microsoft\Application2\Stateful1\obj\x64\Debug\Stateful1.csprojResolveAssemblyReference.cache
 C:\Users\t-chshyy\OneDrive - Microsoft\Application2\Stateful1\obj\x64\Debug\Stateful1.exe
 C:\Users\t-chshyy\OneDrive - Microsoft\Application2\Stateful1\obj\x64\Debug\Stateful1.pdb
+C:\Users\t-chshyy\OneDrive - Microsoft\Application2\Stateful1\bin\x64\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+C:\Users\t-chshyy\OneDrive - Microsoft\Application2\Stateful1\bin\x64\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.xml

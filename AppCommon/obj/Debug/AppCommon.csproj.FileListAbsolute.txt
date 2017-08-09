@@ -63,3 +63,5 @@ C:\Users\t-chshyy\OneDrive - Microsoft\Application2\AppCommon\bin\Debug\ko\Micro
 C:\Users\t-chshyy\OneDrive - Microsoft\Application2\AppCommon\bin\Debug\ru\Microsoft.Spatial.resources.dll
 C:\Users\t-chshyy\OneDrive - Microsoft\Application2\AppCommon\bin\Debug\zh-Hans\Microsoft.Spatial.resources.dll
 C:\Users\t-chshyy\OneDrive - Microsoft\Application2\AppCommon\bin\Debug\zh-Hant\Microsoft.Spatial.resources.dll
+C:\Users\t-chshyy\OneDrive - Microsoft\Application2\AppCommon\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+C:\Users\t-chshyy\OneDrive - Microsoft\Application2\AppCommon\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.xml
