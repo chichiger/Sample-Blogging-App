@@ -186,7 +186,12 @@ namespace Stateful1
 
             using (ITransaction tx = this.StateManager.CreateTransaction())
             {
-                
+
+                // should never be null because of javascript checking
+                if (username == null || password == null)
+                {
+                    return "Please enter all fields";
+                }
                 bool addUser = await signD.TryAddAsync(tx, username, password);
 
                 if (addUser == false)
@@ -254,6 +259,12 @@ namespace Stateful1
             while (!this.collectionsReady)
             {
                 await Task.Delay(TimeSpan.FromMilliseconds(100));
+            }
+
+            // check to make sure the input is a URL
+            if (!url.StartsWith("http://") || !url.StartsWith("https://") )
+            {
+                return "Not a valid URL link";
             }
 
             IReliableDictionary<string, string> md;

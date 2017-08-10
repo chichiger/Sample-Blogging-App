@@ -120,15 +120,17 @@
             var http = new XMLHttpRequest();
             http.onreadystatechange = function () {
                 if (http.readyState == 4) {
-                    if (http.responseText === "Username/Password incorrect. No such username exists" || http.responseText == "Wrong username/password combination") {
-                        document.getElementById("demo").innerHTML += "Testing Logging in with username that doesn't exist";
+                    if (http.responseText === "Username/Password incorrect. No such username exists" || http.responseText === "Wrong username/password combination") {
+                        document.getElementById("demo").innerHTML += "Testing logIn with username that doesn't exist: ";
+                        var newLine = "<span style='color:#00FF00'>" + " Test Passed" + "</span>";
+                        document.getElementById("demo").innerHTML += newLine;
                         document.getElementById("demo").innerHTML += "<br>";
-                        document.getElementById("demo").innerHTML += "Test Passed";
                     }
                     else {
-                        document.getElementById("demo").innerHTML += "Test Logging in with username that doesn't exist";
+                        document.getElementById("demo").innerHTML += "Test logIn with username that doesn't exist: ";
+                        var newHtml = "<span style='color:#FF0000'>" + " Test Failed" + "</span>";
+                        document.getElementById("demo").innerHTML += newHtml;
                         document.getElementById("demo").innerHTML += "<br>";
-                        document.getElementById("demo").innerHTML += "Test Failed";
                     }
 
                 }
@@ -138,7 +140,127 @@
             http.send();
         }
 
+        function test2() {
+            var x = "";
+            var z = "&id7=";
+            var y = "Name";
+            
+
+            var http = new XMLHttpRequest();
+            http.onreadystatechange = function () {
+                if (http.readyState == 4) {
+                    if (http.responseText === "Please enter all fields") {
+                        document.getElementById("demo").innerHTML += "Testing when you submit no username even though it's required: ";
+                        var newLine = "<span style='color:#00FF00'>" + " Test Passed" + "</span>";
+                        document.getElementById("demo").innerHTML += newLine;
+                        document.getElementById("demo").innerHTML += "<br>";
+                    }
+                    else {
+                        document.getElementById("demo").innerHTML += "Testing when you submit no username even though it's required: ";
+                        var newHtml = "<span style='color:#FF0000'>" + " Test Failed" + "</span>";
+                        document.getElementById("demo").innerHTML += newHtml;
+                        document.getElementById("demo").innerHTML += "<br>";
+                    }
+
+                }
+            };
+
+            http.open("GET", 'http://localhost:8490/api/signup?id6='.concat(x, z, y), true);
+            http.send();
+        }
+
+        function test3() {
+            var x = "Unique Username";
+            var z = "&id7=";
+            var y = "Name";
+            
+
+            var http = new XMLHttpRequest();
+            http.onreadystatechange = function () {
+                if (http.readyState == 4) {
+                    if (http.responseText === "You are now signed up") {
+                        document.getElementById("demo").innerHTML += "Testing signUp when you enter a unique username. Should save input: ";
+                        var newLine = "<span style='color:#00FF00'>" + " Test Passed" + "</span>";
+                        document.getElementById("demo").innerHTML += newLine;
+                        document.getElementById("demo").innerHTML += "<br>";
+                    }
+                    else {
+                        document.getElementById("demo").innerHTML += "Testing signUp when you enter a unique username. Should save input: ";
+                        var newHtml = "<span style='color:#FF0000'>" + " Test Failed" + "</span>";
+                        document.getElementById("demo").innerHTML += newHtml;
+                        document.getElementById("demo").innerHTML += "<br>";
+                    }
+
+                }
+            };
+
+            http.open("GET", 'http://localhost:8490/api/signup?id6='.concat(x, z, y), true);
+            http.send();
+        }
+
+        function test4() {
+            var x = "4546234";
+            var z = "&id9=";
+            var y = "test";
+
+
+            var http = new XMLHttpRequest();
+            http.onreadystatechange = function () {
+                if (http.readyState == 4) {
+                    if (http.responseText === "Not a valid URL link") {
+                        document.getElementById("demo").innerHTML += "Testing NewImage by passing a non URL link. Should not pass: ";
+                        var newLine = "<span style='color:#00FF00'>" + " Test Passed" + "</span>";
+                        document.getElementById("demo").innerHTML += newLine;
+                        document.getElementById("demo").innerHTML += "<br>";
+                    }
+                    else {
+                        document.getElementById("demo").innerHTML += "Testing NewImage by passing a non URL link. Should not pass: ";
+                        var newHtml = "<span style='color:#FF0000'>" + " Test Failed" + "</span>";
+                        document.getElementById("demo").innerHTML += newHtml;
+                        document.getElementById("demo").innerHTML += "<br>";
+                    }
+
+                }
+            };
+
+            http.open("GET", 'http://localhost:8490/api/image?id8='.concat(x, z, y), true);
+            http.send();
+        }
+
+        function test5() {
+            var x = "Unique Username";
+            var z = "&id7=";
+            var y = "";
+
+
+            var http = new XMLHttpRequest();
+            http.onreadystatechange = function () {
+                if (http.readyState == 4) {
+                    if (http.responseText === "Please enter all fields") {
+                        document.getElementById("demo").innerHTML += "Testing when you submit no password even though it's required: ";
+                        var newLine = "<span style='color:#00FF00'>" + " Test Passed" + "</span>";
+                        document.getElementById("demo").innerHTML += newLine;
+                        document.getElementById("demo").innerHTML += "<br>";
+                    }
+                    else {
+                        document.getElementById("demo").innerHTML += "Testing when you submit no password even though it's required: ";
+                        var newHtml = "<span style='color:#FF0000'>" + " Test Failed" + "</span>";
+                        document.getElementById("demo").innerHTML += newHtml;
+                        document.getElementById("demo").innerHTML += "<br>";
+                    }
+
+                }
+            };
+
+            http.open("GET", 'http://localhost:8490/api/signup?id6='.concat(x, z, y), true);
+            http.send();
+        }
+
         test1();
+        test2();
+        test3();
+        test4();
+        test5();
 
     }
 </script>
