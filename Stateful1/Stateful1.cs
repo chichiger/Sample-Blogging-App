@@ -254,7 +254,7 @@ namespace Stateful1
             // prevent user from posting if they are not logged in
             if (this.logged[0] == "false")
             {
-                return ("You must be logged in to post");
+                return "You must be logged in to post";
             }
             while (!this.collectionsReady)
             {
@@ -328,7 +328,7 @@ namespace Stateful1
             // prevent user from posting if they are not logged in
             if (this.logged[0] == "false")
             {
-                return ("You must be logged in to post");
+                return "You must be logged in to post";
             }
             while (!this.collectionsReady)
             {
