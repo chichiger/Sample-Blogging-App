@@ -9,6 +9,7 @@ namespace Stateful1
     using System.Collections.Generic;
     using System.Fabric;
     using System.Linq;
+    using System.Text;
     using System.Threading;
     using System.Threading.Tasks;
     using AppCommon;
@@ -27,7 +28,6 @@ namespace Stateful1
         public string LoggedIn = "false";
         private bool collectionsReady; // use this when primary is called
         private string[] logged = {"false"}; // variable for checking if user is logged in or not
-        private List<string> results1 = new List<string>();
         private CancellationToken token;
 
         public Stateful1(StatefulServiceContext context)
@@ -76,8 +76,6 @@ namespace Stateful1
 
             using (ITransaction tx = this.StateManager.CreateTransaction())
             {
-                //CancellationTokenSource source = new CancellationTokenSource();
-                //CancellationToken token = source.Token;
                 // make dictionary for each hashtag
                 DateTime now = DateTime.UtcNow;
 
@@ -109,7 +107,9 @@ namespace Stateful1
         }
 
         /// <summary>
-        /// This method returns all of the posts with the hashtag requested by the user
+        /// This method returns all of the posts with the hashtag requested by the user. StrinBuilder
+        /// is used to avoid having many copies of a string and prevents the garbage collection from
+        /// slowing down
         ///
         /// </summary>
 
@@ -118,6 +118,7 @@ namespace Stateful1
             IReliableDictionary<string, string> md;
             IList<string> results = new List<string>();
             ConditionalValue<IReliableDictionary<string, string>> mdResult = await this.StateManager.TryGetAsync<IReliableDictionary<string, string>>("md");
+            StringBuilder answer = new StringBuilder(); // used to store result and is more efficient than concatenation
             // assert testing
             if (mdResult.HasValue)
             {
@@ -144,7 +145,6 @@ namespace Stateful1
                 IReliableDictionary<UploadKey, string> hashTagDictionary =
                     await this.StateManager.GetOrAddAsync<IReliableDictionary<UploadKey, string>>(hashTagDictionaryName);
 
-                //IReliableDictionary<string, string> hashTagDictionary = await this.StateManager.GetOrAddAsync<IReliableDictionary<string, string>>(hashTagDictionaryName);
                 IAsyncEnumerator<KeyValuePair<UploadKey, string>> enumerator = (await hashTagDictionary.CreateEnumerableAsync(tx)).GetAsyncEnumerator();
                 while (await enumerator.MoveNextAsync(this.token))
                 {
@@ -156,22 +156,21 @@ namespace Stateful1
                 
             }
             string[] convert = results.ToArray();
-            string answer = "";
             for (int i = 0; i < convert.Length; i++)
             {
                 if (i % 2 == 0 && i != 0)
                 {
-                    answer += "\n";
-                    answer += convert[i];
-                    answer += "~";
+                    answer.Append("\n");
+                    answer.Append(convert[i]);
+                    answer.Append("~");
                 }
                 else
                 {
-                    answer += convert[i];
-                    answer += "~";
+                    answer.Append(convert[i]);
+                    answer.Append("~");
                 }
             }
-            return answer;
+            return answer.ToString();
         }
 
 
@@ -214,8 +213,6 @@ namespace Stateful1
         public async Task<string> logIn(string username, string password)
         {
             IReliableDictionary<string, string> signD = await this.StateManager.GetOrAddAsync<IReliableDictionary<string, string>>("signD");
-            IList<string> results = new List<string>();
-
 
             using (ITransaction tx = this.StateManager.CreateTransaction())
             {
@@ -278,7 +275,7 @@ namespace Stateful1
 
             using (ITransaction tx = this.StateManager.CreateTransaction())
             {
-                string[] strArrayOne = tag.Split(','); ;
+                string[] strArrayOne = tag.Split(',');
                 DateTime now = DateTime.UtcNow;
                 for (int i = 0; i < strArrayOne.Length; i++)
                 {
@@ -287,7 +284,6 @@ namespace Stateful1
                     // create a dictionary for each hashtag
                     IReliableDictionary<UploadKey, string> hashTagDictionary =
                         await this.StateManager.GetOrAddAsync<IReliableDictionary<UploadKey, string>>(hashTagDictionaryName);
-                    //string addResult = await hashTagDictionary.AddOrUpdateAsync(tx, DateTime.Now.ToString(), t, (key, value) => t);
                     try
                     {
                         bool addResult = await hashTagDictionary.TryAddAsync(tx, new UploadKey(this.logged[0], now), url);
@@ -351,7 +347,7 @@ namespace Stateful1
 
             using (ITransaction tx = this.StateManager.CreateTransaction())
             {
-                string[] strArrayOne = tag.Split(','); ;
+                string[] strArrayOne = tag.Split(','); 
                 DateTime now = DateTime.UtcNow;
                 foreach (string t in strArrayOne)
                 {
@@ -417,6 +413,7 @@ namespace Stateful1
             IReliableDictionary<string, string> md;
             IList<string> results = new List<string>();
             ConditionalValue<IReliableDictionary<string, string>> mdResult = await this.StateManager.TryGetAsync<IReliableDictionary<string, string>>("md");
+            StringBuilder answer = new StringBuilder(); // use string builder to avoid many string copies
             if (mdResult.HasValue)
             {
                 md = mdResult.Value; // type reliable dictionary
@@ -449,15 +446,14 @@ namespace Stateful1
 
                 await tx.CommitAsync();
                 string[] convert = results.ToArray();
-                string answer = "";
 
                 foreach (string t in convert)
                 {
-                    answer += t;
-                    answer += "~";
+                    answer.Append(t);
+                    answer.Append("~");
                 }
 
-                return answer;
+                return answer.ToString();
             }
         }
 
