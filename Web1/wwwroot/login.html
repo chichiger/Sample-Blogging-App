@@ -3,6 +3,7 @@
 <head>
     <link rel="icon" href="http://localhost:8490/Images/icon.png" type="image/gif">
     <script src="jquery-3.2.1.min.js"></script>
+    <script src="JavaScript.js"></script>
     <style>
         ul {
             list-style-type: none;
@@ -120,60 +121,9 @@
 
 
         </div>
-
-        <script type="text/javascript">
-            function logOut() {
-               
-                var http = new XMLHttpRequest();
-                http.onreadystatechange = function () {
-                    if (http.readyState == 4) {
-                        confirm(http.responseText);
-                        window.location.href = 'http://localhost:8490/htmlpage.html';
-
-                    }
-                };
-
-                http.open("GET", 'http://localhost:8490/api/logout', true);
-                http.send();
-
-     
-            }
-        </script>
-
-
-
-        <script type="text/javascript">
-            function visitPage() {
-                var x = document.getElementById("id4").value;
-                var z = "&id5=";
-                var y = document.getElementById("id5").value;
-                // proceed only when user has entered email and password
-                if (x == "" || y == "") {
-                    alert('Please enter all fields');
-                    return false;
-                }
-                
-                var http = new XMLHttpRequest();
-                http.onreadystatechange = function () {
-                    if (http.readyState == 4) {
-                        if (http.responseText == "Username/Password incorrect. No such username exists" || http.responseText == "Wrong username/password combination") {
-                            confirm(http.responseText);
-                            window.location.href = 'http://localhost:8490/login.html';
-                        }
-                        else {
-                            confirm(http.responseText);
-                            window.location.href = 'http://localhost:8490/htmlpage.html';
-                        }
-
-                    }
-                };
-                
-                http.open("GET", 'http://localhost:8490/api/values/login?id4='.concat(x,z,y), true);
-                http.send();
-                
-                //window.location = 'http://localhost:8490/api/values/login?id4='.concat(x, z, y);
-            }
-        </script>
+        
+        logOut();
+        logIn();
 
             <div class="clearfix">
             <input type="reset" class="cancelbtn" value="Cancel">
