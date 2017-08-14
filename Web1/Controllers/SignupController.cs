@@ -24,32 +24,7 @@ namespace Web1.Controllers
             return message;
         }
 
-        /*
-        public async Task<IList<string>> Get([FromQuery]string id1)
-        {
-            IMyService post2 = ServiceProxy.Create<IMyService>(new Uri("fabric:/Application2/Stateful1"), new ServicePartitionKey(0));
-            IList<string> results = await post2.getPost(id1);
-            return results;
-        }
-        */
-
-        // POST api/values
-        [HttpPost]
-        public void Post([FromBody]string value)
-        {
-        }
-
-        // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
+        
     }
 
 }

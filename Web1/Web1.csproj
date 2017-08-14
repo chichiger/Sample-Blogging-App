@@ -37,6 +37,7 @@
     <Content Include="wwwroot\Images\taiwan.jpg" />
     <Content Include="wwwroot\Images\victoria.jpg" />
     <Content Include="wwwroot\Images\yogurt.jpg" />
+    <Content Include="wwwroot\js\JavaScript.js" />
     <Content Include="wwwroot\login.html" />
     <Content Include="wwwroot\picupload.html" />
     <Content Include="wwwroot\post.html" />

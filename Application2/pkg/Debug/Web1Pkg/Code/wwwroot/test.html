@@ -199,33 +199,30 @@
         }
 
         function test4() {
-            var x = "4546234";
-            var z = "&id9=";
-            var y = "test";
-
-
-            var http = new XMLHttpRequest();
-            http.onreadystatechange = function () {
-                if (http.readyState == 4) {
-                    if (http.responseText === "Not a valid URL link") {
-                        document.getElementById("demo").innerHTML += "Testing NewImage by passing a non URL link. Should not pass: ";
-                        var newLine = "<span style='color:#00FF00'>" + " Test Passed" + "</span>";
-                        document.getElementById("demo").innerHTML += newLine;
-                        document.getElementById("demo").innerHTML += "<br>";
-                    }
-                    else {
-                        document.getElementById("demo").innerHTML += "Testing NewImage by passing a non URL link. Should not pass: ";
-                        var newHtml = "<span style='color:#FF0000'>" + " Test Failed" + "</span>";
-                        document.getElementById("demo").innerHTML += newHtml;
-                        document.getElementById("demo").innerHTML += "<br>";
-                    }
-
-                }
-            };
-
-            http.open("GET", 'http://localhost:8490/api/image?id8='.concat(x, z, y), true);
-            http.send();
+            var x = " ";
+            var output;
+            if (x === " " || x.length === 0) {
+                output = "Please enter a hashtag";
+            } else {
+                output = "false";
+            }
+            
+            if (output === "Please enter a hashtag") {
+                document.getElementById("demo").innerHTML += "Testing when you submit nothing for hashtag: ";
+                var newLine = "<span style='color:#00FF00'>" + " Test Passed" + "</span>";
+                document.getElementById("demo").innerHTML += newLine;
+                document.getElementById("demo").innerHTML += "<br>";
+            }
+            else {
+                document.getElementById("demo").innerHTML += "Testing when you submit nothing for hashtag: ";
+                var newHtml = "<span style='color:#FF0000'>" + " Test Failed" + "</span>";
+                document.getElementById("demo").innerHTML += newHtml;
+                document.getElementById("demo").innerHTML += "<br>";
+            }
         }
+
+
+        
 
         function test5() {
             var x = "Unique Username";
@@ -256,11 +253,163 @@
             http.send();
         }
 
+        function test6() {
+            var x = "Does not exist";
+            
+
+            var http = new XMLHttpRequest();
+            http.onreadystatechange = function () {
+                if (http.readyState == 4) {
+                    if (http.responseText === "No posts with this hashtag") {
+                        document.getElementById("demo").innerHTML += "Testing when you submit a hashtag with no posts: ";
+                        var newLine = "<span style='color:#00FF00'>" + " Test Passed" + "</span>";
+                        document.getElementById("demo").innerHTML += newLine;
+                        document.getElementById("demo").innerHTML += "<br>";
+                    }
+                    else {
+                        document.getElementById("demo").innerHTML += "Testing when you submit a hashtag with no posts: ";
+                        var newHtml = "<span style='color:#FF0000'>" + " Test Failed" + "</span>";
+                        document.getElementById("demo").innerHTML += newHtml;
+                        document.getElementById("demo").innerHTML += "<br>";
+                    }
+
+                }
+            };
+
+            http.open("GET", 'http://localhost:8490/api/getimg?id1='.concat(x), true);
+            http.send();
+        }
+
+        function test7() {
+            var x = "";
+            var z = "&id3=";
+            var y = "Test";
+            var value;
+            if (x === "") {
+                value = 'Please fill all required fields';
+
+            }
+
+
+            if (value === "Please fill all required fields") {
+                document.getElementById("demo").innerHTML += "Testing NewPost. Submitting empty text: ";
+                var newLine = "<span style='color:#00FF00'>" + " Test Passed" + "</span>";
+                document.getElementById("demo").innerHTML += newLine;
+                document.getElementById("demo").innerHTML += "<br>";
+            }
+            else {
+                document.getElementById("demo").innerHTML += "Testing NewPost. Submitting empty text: ";
+                var newHtml = "<span style='color:#FF0000'>" + " Test Failed" + "</span>";
+                document.getElementById("demo").innerHTML += newHtml;
+                document.getElementById("demo").innerHTML += "<br>";
+            }
+        }
+
+        function test8() {
+            var x = "Enter hashtag that does not exist";
+            if (x === " " || x.length === 0) {
+                alert('Please enter a hashtag');
+                return false;
+            }
+
+            var http = new XMLHttpRequest();
+            http.onreadystatechange = function () {
+                if (http.readyState == 4) {
+                    if (http.responseText === "No posts with this hashtag") {
+                        document.getElementById("demo").innerHTML += "Testing getPost when you submit a hashtag with no posts: ";
+                        var newLine = "<span style='color:#00FF00'>" + " Test Passed" + "</span>";
+                        document.getElementById("demo").innerHTML += newLine;
+                        document.getElementById("demo").innerHTML += "<br>";
+                    }
+                    else {
+                        document.getElementById("demo").innerHTML += "Testing getPost when you submit a hashtag with no posts: ";
+                        var newHtml = "<span style='color:#FF0000'>" + " Test Failed" + "</span>";
+                        document.getElementById("demo").innerHTML += newHtml;
+                        document.getElementById("demo").innerHTML += "<br>";
+                    }
+
+                }
+            };
+
+            http.open("GET", 'http://localhost:8490/api/hashtags?id1='.concat(x), true);
+            http.send();
+        }
+
+
+        function test9() {
+            var x = "This test should pass";
+            var z = "&id3=";
+            var y = "test";
+            if (x === " " || x.length === 0) {
+                alert('Please enter a hashtag');
+                return false;
+            }
+
+            var http = new XMLHttpRequest();
+            http.onreadystatechange = function () {
+                if (http.readyState == 4) {
+                    if (http.responseText === "Successfully posted") {
+                        document.getElementById("demo").innerHTML += "Testing newPost with correct values: ";
+                        var newLine = "<span style='color:#00FF00'>" + " Test Passed" + "</span>";
+                        document.getElementById("demo").innerHTML += newLine;
+                        document.getElementById("demo").innerHTML += "<br>";
+                    }
+                    else {
+                        document.getElementById("demo").innerHTML += "Testing newPost with correct values: ";
+                        var newHtml = "<span style='color:#FF0000'>" + " Test Failed" + "</span>";
+                        document.getElementById("demo").innerHTML += newHtml;
+                        document.getElementById("demo").innerHTML += "<br>";
+                    }
+
+                }
+            };
+
+            http.open("GET", 'http://localhost:8490/api/post?id2='.concat(x, z, y), true);
+            http.send();
+        }
+
+        function test10() {
+            var x = "test";
+            if (x === " " || x.length === 0) {
+                alert('Please enter a hashtag');
+                return false;
+            }
+
+            var http = new XMLHttpRequest();
+            http.onreadystatechange = function () {
+                if (http.readyState == 4) {
+                    if (http.responseText !== "No posts with this hashtag") {
+                        document.getElementById("demo").innerHTML += "Testing getPost when you submit a hashtag with posts: ";
+                        var newLine = "<span style='color:#00FF00'>" + " Test Passed" + "</span>";
+                        document.getElementById("demo").innerHTML += newLine;
+                        document.getElementById("demo").innerHTML += "<br>";
+                    }
+                    else {
+                        document.getElementById("demo").innerHTML += "Testing getPost when you submit a hashtag with posts: ";
+                        var newHtml = "<span style='color:#FF0000'>" + " Test Failed" + "</span>";
+                        document.getElementById("demo").innerHTML += newHtml;
+                        document.getElementById("demo").innerHTML += "<br>";
+                    }
+
+                }
+            };
+
+            http.open("GET", 'http://localhost:8490/api/hashtags?id1='.concat(x), true);
+            http.send();
+        }
+
+       
+
         test1();
         test2();
         test3();
         test4();
         test5();
+        test6();
+        test7();
+        test8();
+        test9();
+        test10();
 
     }
 </script>
