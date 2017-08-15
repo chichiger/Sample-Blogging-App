@@ -117,7 +117,7 @@
 
             http.open("GET", "http://localhost:8490/api/values/login?email=".concat(x, z, y), true);
             http.send();
-        //return false;
+          return false;
     }
 
         function newPost() {
@@ -131,6 +131,9 @@
                 return false;
             }
             var cookie = getCookie("LoggedIn");
+            if (cookie === "" || cookie == null) {
+                return "You must be logged in to post";
+            }
             var http = new XMLHttpRequest();
             http.onreadystatechange = function() {
                 if (http.readyState === 4) {
@@ -161,6 +164,9 @@
                 return false;
             }
             var cookie = getCookie("LoggedIn");
+            if (cookie === "" || cookie == null) {
+                return "You must be logged in to post";
+            }
             var http = new XMLHttpRequest();
             http.onreadystatechange = function() {
                 if (http.readyState === 4) {

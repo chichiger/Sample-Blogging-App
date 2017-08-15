@@ -38,7 +38,6 @@
             margin: 8px 0;
             display: inline-block;
             border: 1px solid #ccc;
-            box-sizing: border-box;
         }
 
         /* Set a style for all buttons */
@@ -83,7 +82,7 @@
         }
 
         /* Clear floats */
-        .clearfix::after {
+        .clearfix:after {
             content: "";
             clear: both;
             display: table;
@@ -144,16 +143,15 @@
         <script type="text/javascript">
             function previewImage() {
                 var x = document.getElementById("id8").value;
-                var z = "&id9=";
-                var y = document.getElementById("id9").value;
                 // proceed only when user has entered email and password
-                if (x == "") {
+                if (x === "") {
                     alert('Please upload image');
                     return false;
                 }
                 var n = document.createElement("IMG");
                 n.setAttribute("src", document.getElementById("id8").value);
                 document.body.appendChild(n);
+                return false;
             }
         </script>
 
@@ -162,8 +160,10 @@
             // this function is called to update the cookie value as the current user
             function updateCookie() {
                 var cookie = getCookie("LoggedIn");
+                if (cookie === "" || cookie == null) {
+                    return "You must be logged in to post";
+                }
                 document.getElementById("cookie").value = cookie;
-               
             }
         </script>
 

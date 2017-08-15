@@ -1,26 +1,24 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.ServiceFabric.Services.Remoting.Client;
-using Microsoft.ServiceFabric.Services.Client;
-using Microsoft.ServiceFabric.Services.Remoting.Runtime;
-using AppCommon;
-using Microsoft.AspNetCore.Http;
-using System.IO;
-using System.Drawing;
+// ------------------------------------------------------------
+//  Copyright (c) Microsoft Corporation.  All rights reserved.
+//  Licensed under the MIT License (MIT). See License.txt in the repo root for license information.
+// ------------------------------------------------------------
 
 namespace Web1.Controllers
 {
-    //[Route("api/[controller]")]
+    using System;
+    using System.IO;
+    using System.Threading.Tasks;
+    using AppCommon;
+    using Microsoft.AspNetCore.Http;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.ServiceFabric.Services.Client;
+    using Microsoft.ServiceFabric.Services.Remoting.Client;
+
     public class ImageController : Controller
     {
-        [HttpGet] //api/{id}    ?id1=djaksdjkas&id2=djkasdjas     //post/{textbox}/{ds}
+        [HttpGet]
         [Route("api/image")]
-        public async Task<String> Get([FromQuery]string id8, [FromQuery]string id9, [FromQuery] string cookie)
-
+        public async Task<String> Get([FromQuery] string id8, [FromQuery] string id9, [FromQuery] string cookie)
         {
             IMyService post3 = ServiceProxy.Create<IMyService>(new Uri("fabric:/Application2/Stateful1"), new ServicePartitionKey(0));
 
@@ -30,28 +28,25 @@ namespace Web1.Controllers
 
 
         [HttpPost]
-        [Route("api/file")] 
+        [Route("api/file")]
         public async Task<IActionResult> Post(IFormFile file, string id12, string cookie)
         {
             string s = "";
-            
+
             if (file.Length > 0)
             {
-                using (var fileStream = file.OpenReadStream())
-                using (var ms = new MemoryStream())
+                using (Stream fileStream = file.OpenReadStream())
+                using (MemoryStream ms = new MemoryStream())
                 {
                     fileStream.CopyTo(ms);
-                    var fileBytes = ms.ToArray();
+                    byte[] fileBytes = ms.ToArray();
                     s = Convert.ToBase64String(fileBytes);
                 }
             }
             IMyService post5 = ServiceProxy.Create<IMyService>(new Uri("fabric:/Application2/Stateful1"), new ServicePartitionKey(0));
-            
-            string message = await post5.FileImage(s, id12, cookie);
-            return Ok("passed");
-        }
-        
-       
-    }
 
+            string message = await post5.FileImage(s, id12, cookie);
+            return this.Ok("passed");
+        }
+    }
 }

@@ -10,15 +10,10 @@ using AppCommon;
 
 namespace Web1.Controllers
 {
-    //[Route("api/[controller]")]
     public class HashtagsController : Controller
     {
-        //[HttpGet("api/abc")]
-        [HttpGet] //api/{id}    ?id1=djaksdjkas&id2=djkasdjas     //post/{textbox}/{ds}
+        [HttpGet] 
         [Route("api/hashtags")]
-        //public async Task<String> Get([FromQuery]string id2, [FromQuery]string id3)
-       
-
 
         public async Task<string> Get([FromQuery] string id1)
         {
@@ -29,8 +24,6 @@ namespace Web1.Controllers
 
         [Route("api/search")]
         public async Task<String> GetOption([FromQuery]string id1)
-        //public async Task Get([FromQuery]string id2, [FromQuery]string id3)
-
         {
             IMyService post3 = ServiceProxy.Create<IMyService>(new Uri("fabric:/Application2/Stateful1"), new ServicePartitionKey(0));
 
@@ -40,8 +33,6 @@ namespace Web1.Controllers
 
         [Route("api/getimg")]
         public async Task<String> GetPics([FromQuery]string id1)
-        //public async Task Get([FromQuery]string id2, [FromQuery]string id3)
-
         {
             IMyService post3 = ServiceProxy.Create<IMyService>(new Uri("fabric:/Application2/Stateful1"), new ServicePartitionKey(0));
 

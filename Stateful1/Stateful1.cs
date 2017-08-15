@@ -25,9 +25,7 @@ namespace Stateful1
     /// 
     internal sealed class Stateful1 : StatefulService, IMyService
     {
-        //public string LoggedIn = "false";
         private bool collectionsReady; // use this when primary is called
-        private string[] logged = {"false"}; // variable for checking if user is logged in or not
         private CancellationToken token;
 
         public Stateful1(StatefulServiceContext context)
@@ -38,8 +36,6 @@ namespace Stateful1
         /// <remarks>
         /// For more information on service communication, see https://aka.ms/servicefabricservicecommunication
         /// </remarks>
-            
-
         /// <summary>
         /// This method gets the text or image from the user and the hashtag associated with it.
         /// During the transaction, a master dictionary will have the names of all the hashtags,
@@ -54,7 +50,7 @@ namespace Stateful1
             {
                 await Task.Delay(TimeSpan.FromMilliseconds(100));
             }
-            
+
             IReliableDictionary<string, string> md;
             ConditionalValue<IReliableDictionary<string, string>> mdResult = await this.StateManager.TryGetAsync<IReliableDictionary<string, string>>("md");
             if (mdResult.HasValue)
@@ -100,7 +96,7 @@ namespace Stateful1
                     }
                 }
                 await tx.CommitAsync();
-                
+
                 return "Successfully posted";
             }
         }
@@ -111,7 +107,6 @@ namespace Stateful1
         /// slowing down
         ///
         /// </summary>
-
         public async Task<string> GetPost(string tag)
         {
             IReliableDictionary<string, string> md;
@@ -139,7 +134,6 @@ namespace Stateful1
                     return "No posts with this hashtag";
                 }
                 string hashTagDictionaryName = await md.GetOrAddAsync(tx, tag, tag);
-                //ConditionalValue<IReliableDictionary<string, string>> HD = await this.StateManager.TryGetAsync<IReliableDictionary<string, string>> (tag);
 
                 IReliableDictionary<UploadKey, string> hashTagDictionary =
                     await this.StateManager.GetOrAddAsync<IReliableDictionary<UploadKey, string>>(hashTagDictionaryName);
@@ -152,7 +146,6 @@ namespace Stateful1
                 }
 
                 await tx.CommitAsync();
-                
             }
             string[] convert = results.ToArray();
             for (int i = 0; i < convert.Length; i++)
@@ -174,7 +167,6 @@ namespace Stateful1
 
 
         public async Task<string> signUp(string username, string password)
-
         {
             while (!this.collectionsReady)
             {
@@ -184,7 +176,6 @@ namespace Stateful1
 
             using (ITransaction tx = this.StateManager.CreateTransaction())
             {
-
                 // should never be null because of javascript checking
                 if (username == null || password == null)
                 {
@@ -197,7 +188,6 @@ namespace Stateful1
                     return "Username already taken. Please enter a different one";
                 }
 
-               
                 await tx.CommitAsync();
                 return "You are now signed up";
             }
@@ -224,7 +214,6 @@ namespace Stateful1
                 {
                     if (userCombo.Value == password)
                     {
-       
                         return "Login successful";
                     }
                     else
@@ -243,14 +232,12 @@ namespace Stateful1
         /// the image URL as the value 
         /// </summary>
         public async Task<string> UrlImage(string url, string tag, string cookie)
-
         {
             while (!this.collectionsReady)
             {
                 await Task.Delay(TimeSpan.FromMilliseconds(100));
             }
 
-            
             IReliableDictionary<string, string> md;
             ConditionalValue<IReliableDictionary<string, string>> mdResult = await this.StateManager.TryGetAsync<IReliableDictionary<string, string>>("md");
             if (mdResult.HasValue)
@@ -289,9 +276,7 @@ namespace Stateful1
                         Console.Write(e);
                         throw;
                     }
-                    
                 }
-               
 
                 await tx.CommitAsync();
 
@@ -330,7 +315,7 @@ namespace Stateful1
 
             using (ITransaction tx = this.StateManager.CreateTransaction())
             {
-                string[] strArrayOne = tag.Split(','); 
+                string[] strArrayOne = tag.Split(','); //contains array of hashtags
                 DateTime now = DateTime.UtcNow;
                 foreach (string t in strArrayOne)
                 {
@@ -340,8 +325,12 @@ namespace Stateful1
                     IReliableDictionary<UploadKey, string> hashTagDictionary =
                         await this.StateManager.GetOrAddAsync<IReliableDictionary<UploadKey, string>>(hashTagDictionaryName + "Image");
                     bool addResult = await hashTagDictionary.TryAddAsync(tx, new UploadKey(username, now), url);
+                    if (addResult == false)
+                    {
+                        return "Unable to post. Please try again";
+                    }
                 }
-                   
+
                 await tx.CommitAsync();
                 return "Successfully posted";
             }
@@ -367,7 +356,7 @@ namespace Stateful1
             else
             {
                 // crash the process
-                string causeofFailure = "Dictionary bug somewhere. Should be true";
+                const string causeofFailure = "Dictionary bug somewhere. Should be true";
                 Environment.FailFast(causeofFailure);
                 return ("Dictionary bug somewhere. Should be true"); // unreachable
             }
@@ -377,19 +366,21 @@ namespace Stateful1
                 IList<string> results = new List<string>();
 
                 // create enumerator to get the values from the dictionary
-                IAsyncEnumerator<KeyValuePair<string, string>> enumerator = (await md.CreateEnumerableAsync(tx, option => option.StartsWith(name), EnumerationMode.Ordered)).GetAsyncEnumerator();
+                IAsyncEnumerator<KeyValuePair<string, string>> enumerator =
+                    (await md.CreateEnumerableAsync(tx, option => option.StartsWith(name), EnumerationMode.Ordered)).GetAsyncEnumerator();
                 while (await enumerator.MoveNextAsync(this.token))
                 {
                     results.Add(enumerator.Current.Key);
                 }
-                
+
                 string output = string.Join(" , ", results.ToArray());
                 return output;
             }
         }
 
         /// <summary>
-        /// returns image to user 
+        /// returns image to user. It does the same thing as getPost except it checks the dictionary that stores
+        /// all of the images uploaded from a computer
         /// </summary>
         public async Task<string> getImage(string tag)
         {
@@ -404,7 +395,7 @@ namespace Stateful1
             else
             {
                 // crash the process
-                string causeofFailure = "Dictionary bug somewhere. Should be true";
+                const string causeofFailure = "Dictionary bug somewhere. Should be true";
                 Environment.FailFast(causeofFailure);
                 throw new Exception("Dictionary bug somewhere. Should be true");
             }
@@ -457,31 +448,6 @@ namespace Stateful1
             this.token = cancellationToken; // use this for enumerate
             await this.StateManager.GetOrAddAsync<IReliableDictionary<string, string>>("md");
             this.collectionsReady = true;
-
-            IReliableDictionary<string, long> myDictionary = await this.StateManager.GetOrAddAsync<IReliableDictionary<string, long>>("myDictionary");
-
-            while (true)
-            {
-                cancellationToken.ThrowIfCancellationRequested();
-
-                using (ITransaction tx = this.StateManager.CreateTransaction())
-                {
-                    ConditionalValue<long> result = await myDictionary.TryGetValueAsync(tx, "Counter");
-
-                    ServiceEventSource.Current.ServiceMessage(
-                        this.Context,
-                        "Current Counter Value: {0}",
-                        result.HasValue ? result.Value.ToString() : "Value does not exist.");
-
-                    await myDictionary.AddOrUpdateAsync(tx, "Counter", 0, (key, value) => ++value);
-
-                    // If an exception is thrown before calling CommitAsync, the transaction aborts, all changes are 
-                    // discarded, and nothing is saved to the secondary replicas.
-                    await tx.CommitAsync();
-                }
-
-                await Task.Delay(TimeSpan.FromSeconds(1), cancellationToken);
-            }
         }
 
         private ICommunicationListener CreateServiceCommunicationListener(ServiceContext context)

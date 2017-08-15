@@ -10,7 +10,6 @@ namespace Web1.Controllers
     [Route("api/[controller]")]
     public class ValuesController : Controller
     {
-        // GET api/values
         [HttpGet]
         [Route("login")]
         public async Task<String> Get([FromQuery]string email, [FromQuery]string password)

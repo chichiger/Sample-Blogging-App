@@ -110,13 +110,14 @@
 <p><br></p>
 <h2>Test</h2>
  
-<!--Testing logIn with a username that does not exist. It should return a message saying that the
-    username and password is incorrect-->
 <script type="text/javascript">
     function visitPage() {
+
+        /*Testing logIn with a username that does not exist. It should return a message saying that the
+    username and password is incorrect */
         function test1() {
             var x = "New";
-            var z = "&id5=";
+            var z = "&password=";
             var y = "Name";
 
                 
@@ -139,9 +140,11 @@
                 }
             };
                 
-            http.open("GET", 'http://localhost:8490/api/values/login?id4='.concat(x,z,y), true);
+            http.open("GET", 'http://localhost:8490/api/values/login?email='.concat(x,z,y), true);
             http.send();
         }
+        /*Testing signUp by submitting nothing for the username even though it's required. Should
+        fail*/
 
         function test2() {
             var x = "";
@@ -172,6 +175,8 @@
             http.send();
         }
 
+        /*Testing signUp with a username that is not yet taken. It should return a message saying that the
+        you are now signed up */
         function test3() {
             var x = "Unique Username";
             var z = "&id7=";
@@ -201,10 +206,11 @@
             http.send();
         }
 
-        
+        /*Testing logIn with a username that is in the dictionary. It should return a message saying that the
+        login was successful*/
         function test4() {
                 var x = "Unique Username";
-                var z = "&id5=";
+                var z = "&password=";
                 var y = "Name";
 
                 
@@ -227,13 +233,11 @@
                     }
                 };
                 
-                http.open("GET", 'http://localhost:8490/api/values/login?id4='.concat(x,z,y), true);
+                http.open("GET", 'http://localhost:8490/api/values/login?email='.concat(x,z,y), true);
                 http.send();
         }
 
-
-        
-        
+    
         function test5() {
             var x = "Unique Username";
             var z = "&id7=";
@@ -290,9 +294,10 @@
             http.send();
         }
 
+        /* Should return message saying to fill everything out */
         function test7() {
             var x = "";
-            var z = "&id3=";
+            var z = "&hashtags=";
             var y = "Test";
             var value;
             if (x === "") {
@@ -315,6 +320,7 @@
             }
         }
 
+        /* Testing by enter a hashtag that is not in the dictionary. It should say there are no posts */
         function test8() {
             var x = "Enter hashtag that does not exist";
             if (x === " " || x.length === 0) {
@@ -348,7 +354,7 @@
 
         function test9() {
             var x = "This test should pass";
-            var z = "&id3=";
+            var z = "&hashtags=";
             var y = "test";
             if (x === " " || x.length === 0) {
                 alert('Please enter a hashtag');
@@ -374,10 +380,11 @@
                 }
             };
 
-            http.open("GET", 'http://localhost:8490/api/post?id2='.concat(x, z, y), true);
+            http.open("GET", 'http://localhost:8490/api/post?text='.concat(x, z, y), true);
             http.send();
         }
 
+        /*Testing by submitting a hashtag withposts. It should return at least one post*/
         function test10() {
             var x = "test";
             if (x === " " || x.length === 0) {
@@ -409,6 +416,25 @@
             return false;
         }
 
+        /*Testing logIn with a username that is in the dictionary. Checking to make sure cookie value
+        is the username*/
+        function test11() {
+                
+            var cookie = getCookie("LoggedIn");
+            if (cookie === "" || cookie == null) {
+                document.getElementById("demo").innerHTML += "Testing getPost when you submit a hashtag with posts: ";
+                var newHtml = "<span style='color:#FF0000'>" + " Test Failed" + "</span>";
+                document.getElementById("demo").innerHTML += newHtml;
+                document.getElementById("demo").innerHTML += "<br>";
+            } else {
+                document.getElementById("demo").innerHTML += "Testing getPost when you submit a hashtag with posts: ";
+                var newLine = "<span style='color:#00FF00'>" + " Test Passed" + "</span>";
+                document.getElementById("demo").innerHTML += newLine;
+                document.getElementById("demo").innerHTML += "<br>";
+            }
+                
+            
+        }
        
 
         test1();
@@ -421,7 +447,7 @@
         test8();
         test9();
         test10();
-
+        test11();
     }
 </script>
 
