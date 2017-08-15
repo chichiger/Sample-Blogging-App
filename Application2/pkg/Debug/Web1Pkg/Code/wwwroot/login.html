@@ -39,7 +39,6 @@
             margin: 8px 0;
             display: inline-block;
             border: 1px solid #ccc;
-            box-sizing: border-box;
         }
 
         /* Set a style for all buttons */
@@ -78,7 +77,7 @@
         }
 
         /* Clear floats */
-        .clearfix::after {
+        .clearfix:after {
             content: "";
             clear: both;
             display: table;
@@ -107,10 +106,10 @@
         <input type="button" class="logoutbtn" value="Log Out" onclick="logOut()">
         <div class="container">
             <p><label><b>Email</b></label></p>
-            <p><input id ="id4" type="text" placeholder="Enter email"></p>
+            <p><input id ="email" type="text" placeholder="Enter email"></p>
 
             <p><label><b>Password</b></label></p>
-            <p><input id="id5" type="password" placeholder="Enter Password"></p>
+            <p><input id="password" type="password" placeholder="Enter Password"></p>
 
 
         </div>

@@ -3,6 +3,7 @@
 <head>
     <link rel="icon" href="http://localhost:8490/Images/icon.png" type="image/gif">
     <script src="jquery-3.2.1.min.js"></script>
+    <script src="JavaScript.js"></script>
     <style>
         ul {
             list-style-type: none;
@@ -202,31 +203,37 @@
 
         
         function test4() {
-            var x = " ";
-            var output;
-            if (x === " " || x.length === 0) {
-                output = "Please enter a hashtag";
-            } else {
-                output = "false";
-            }
-            
-            if (output === "Please enter a hashtag") {
-                document.getElementById("demo").innerHTML += "Testing when you submit nothing for hashtag: ";
-                var newLine = "<span style='color:#00FF00'>" + " Test Passed" + "</span>";
-                document.getElementById("demo").innerHTML += newLine;
-                document.getElementById("demo").innerHTML += "<br>";
-            }
-            else {
-                document.getElementById("demo").innerHTML += "Testing when you submit nothing for hashtag: ";
-                var newHtml = "<span style='color:#FF0000'>" + " Test Failed" + "</span>";
-                document.getElementById("demo").innerHTML += newHtml;
-                document.getElementById("demo").innerHTML += "<br>";
-            }
+                var x = "Unique Username";
+                var z = "&id5=";
+                var y = "Name";
+
+                
+                var http = new XMLHttpRequest();
+                http.onreadystatechange = function () {
+                    if (http.readyState == 4) {
+                        if (http.responseText === "Login successful") {
+                            document.getElementById("demo").innerHTML += "Testing logIn with username that exists: ";
+                            var newLine = "<span style='color:#00FF00'>" + " Test Passed" + "</span>";
+                            document.getElementById("demo").innerHTML += newLine;
+                            document.getElementById("demo").innerHTML += "<br>";
+                        }
+                        else {
+                            document.getElementById("demo").innerHTML += "Test logIn with username that exists: ";
+                            var newHtml = "<span style='color:#FF0000'>" + " Test Failed" + "</span>";
+                            document.getElementById("demo").innerHTML += newHtml;
+                            document.getElementById("demo").innerHTML += "<br>";
+                        }
+
+                    }
+                };
+                
+                http.open("GET", 'http://localhost:8490/api/values/login?id4='.concat(x,z,y), true);
+                http.send();
         }
 
 
         
-
+        
         function test5() {
             var x = "Unique Username";
             var z = "&id7=";
@@ -399,6 +406,7 @@
 
             http.open("GET", 'http://localhost:8490/api/hashtags?id1='.concat(x), true);
             http.send();
+            return false;
         }
 
        

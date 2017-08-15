@@ -60,25 +60,29 @@
         return "";
     }
 
+    // this function will check for the specific cookie based on value. The value here will be the username
+    // that the user enters. If it's there, it will write a return message, and if it is not, a cookie
+    // for the user will be created. The name parameter for setCookie will always be LoggedIn, and the value
+    // depends on whoever is logging in. By doing this, if a user logs in from their browser, the value returned
+    // will be their username, and if someone else is logging in from their browser, it will return their
+    // username and not the other person's. 
     function checkCookie() {
-        var user1 = document.getElementById("id4").value;
+        var user1 = document.getElementById("email").value;
         var user = getCookie(user1);
         if (user !== "") {
             alert("Welcome again " + user);
         } else {
-            user = document.getElementById("id4").value;
+            user = document.getElementById("email").value;
             if (user !== "" && user != null) {
-                //setCookie(user.toString(), user, 1);
                 setCookie("LoggedIn", user, 1);
             }
         }
     }
 
+    // delete a cookie by updating the current username cookie and changing the expiration date to 0
     function deleteCookie() {
-        //var user1 = document.getElementById("id4").value;
         var cookie = getCookie("LoggedIn");
         if (cookie !== "" && cookie != null) {
-            //setCookie(user.toString(), user, 1);
             setCookie("LoggedIn", cookie, 0);
             alert("You are logged out, " + cookie);
 
@@ -86,15 +90,14 @@
     }
 
     function logIn() {
-            var x = document.getElementById("id4").value;
-            var z = "&id5=";
-            var y = document.getElementById("id5").value;
+            var x = document.getElementById("email").value;
+            var z = "&password=";
+            var y = document.getElementById("password").value;
             // proceed only when user has entered email and password
             if (x === "" || y === "") {
                 alert("Please enter all fields");
                 return false;
             }
-
 
             var http = new XMLHttpRequest();
             http.onreadystatechange = function() {
@@ -104,7 +107,7 @@
                         confirm(http.responseText);
                         window.location.href = "http://localhost:8490/login.html";
                     } else {
-                        checkCookie();
+                        checkCookie(); // create cookie with the username as the value
                         confirm(http.responseText);
                         window.location.href = "http://localhost:8490/htmlpage.html";
                     }
@@ -112,9 +115,9 @@
                 }
             };
 
-            http.open("GET", "http://localhost:8490/api/values/login?id4=".concat(x, z, y), true);
+            http.open("GET", "http://localhost:8490/api/values/login?email=".concat(x, z, y), true);
             http.send();
-        return false;
+        //return false;
     }
 
         function newPost() {

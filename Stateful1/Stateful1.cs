@@ -209,10 +209,9 @@ namespace Stateful1
         /// it will return an error. If it is there, it will check the value to make sure
         /// it's the same and will say if it is successful or not
         /// </summary>
-        public async Task<string> logIn(string username, string password)
+        public async Task<string> LogIn(string username, string password)
         {
             IReliableDictionary<string, string> signD = await this.StateManager.GetOrAddAsync<IReliableDictionary<string, string>>("signD");
-            IReliableDictionary<string, string> loggedDictionary = await this.StateManager.GetOrAddAsync<IReliableDictionary<string, string>>("loggedDictionary");
             using (ITransaction tx = this.StateManager.CreateTransaction())
             {
                 ConditionalValue<string> userCombo = await signD.TryGetValueAsync(tx, username);
@@ -225,9 +224,7 @@ namespace Stateful1
                 {
                     if (userCombo.Value == password)
                     {
-                        //this.LoggedIn = username;
-                        this.logged[0] = username;
-                        //bool addResult = await loggedDictionary.TryAddAsync(tx, username, cookie);
+       
                         return "Login successful";
                     }
                     else
@@ -282,6 +279,10 @@ namespace Stateful1
                     try
                     {
                         bool addResult = await hashTagDictionary.TryAddAsync(tx, new UploadKey(cookie, now), url);
+                        if (addResult == false)
+                        {
+                            return "Unable to post. Please try again";
+                        }
                     }
                     catch (Exception e)
                     {

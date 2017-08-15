@@ -12,7 +12,7 @@ namespace AppCommon
         Task<string> NewPost(string t, string tag, string username);
         Task<string> GetPost(string tag); // function to return posts to user
         Task<string> signUp(string username, string password);
-        Task<string> logIn(string username, string password);
+        Task<string> LogIn(string username, string password);
         Task<string> UrlImage(string url, string tag, string username);
         Task<string> FileImage(string URL, string tag, string username);
         Task<string> searchUp(string name);
