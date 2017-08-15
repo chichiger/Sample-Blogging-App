@@ -112,45 +112,11 @@
         </div>
 
         
-        <script type="text/javascript">
-            function visitPage() {
-                var x = document.getElementById("id2").value;
-                var z = "&id3=";
-                var y = document.getElementById("id3").value;
-                // proceed only when user has entered a hashtag
-               if (y === "" || x === "")
-               {
-                   alert('Please fill all required fields');
-                   return false;
-                }
-                
-               var http = new XMLHttpRequest();
-               http.onreadystatechange = function () {
-                   if (http.readyState == 4) {
-                       if (http.responseText == "You must be logged in to post")
-                       {
-                           confirm(http.responseText);
-                           window.location.href = 'http://localhost:8490/post.html';
-                       }
-                       else {
-                           confirm(http.responseText);
-                           window.location.href = 'http://localhost:8490/htmlpage.html';
-                       }
-                       
-                   }
-               };
-
-               http.open("GET", 'http://localhost:8490/api/post?id2='.concat(x, z, y), true);
-               http.send(); 
-               //window.location = 'http://localhost:8490/api/post?id2='.concat(x,z,y);
-            }
-            
-
-        </script>
+      
 
         <div class="clearfix">
             <input type="reset" class="cancelbtn" value="Cancel">
-            <input type="button" class="signupbtn" value="Submit" onclick="visitPage()">
+            <input type="button" class="signupbtn" value="Submit" onclick="newPost()">
         </div>
 
 

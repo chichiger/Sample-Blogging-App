@@ -17,34 +17,21 @@ namespace Web1.Controllers
     //[Route("api/[controller]")]
     public class ImageController : Controller
     {
-        //[HttpGet("api/abc")]
         [HttpGet] //api/{id}    ?id1=djaksdjkas&id2=djkasdjas     //post/{textbox}/{ds}
         [Route("api/image")]
-        public async Task<String> Get([FromQuery]string id8, [FromQuery]string id9)
+        public async Task<String> Get([FromQuery]string id8, [FromQuery]string id9, [FromQuery] string cookie)
 
         {
             IMyService post3 = ServiceProxy.Create<IMyService>(new Uri("fabric:/Application2/Stateful1"), new ServicePartitionKey(0));
 
-            string message = await post3.NewImage(id8, id9);
-            return message;
-        }
-
-        [Route("api/upload")]
-        public async Task<String> GetFile([FromQuery]string id10, [FromQuery]string id9)
-        //public async Task Get([FromQuery]string id2, [FromQuery]string id3)
-
-        {
-            IMyService post3 = ServiceProxy.Create<IMyService>(new Uri("fabric:/Application2/Stateful1"), new ServicePartitionKey(0));
-
-            string message = await post3.uploadImage(id10, id9);
+            string message = await post3.UrlImage(id8, id9, cookie);
             return message;
         }
 
 
-        // POST api/values
         [HttpPost]
         [Route("api/file")] 
-        public async Task<IActionResult> Post(IFormFile file, string id12)
+        public async Task<IActionResult> Post(IFormFile file, string id12, string cookie)
         {
             string s = "";
             
@@ -60,7 +47,7 @@ namespace Web1.Controllers
             }
             IMyService post5 = ServiceProxy.Create<IMyService>(new Uri("fabric:/Application2/Stateful1"), new ServicePartitionKey(0));
             
-            string message = await post5.uploadImage(s, id12);
+            string message = await post5.uploadImage(s, id12, cookie);
             return Ok("passed");
         }
         

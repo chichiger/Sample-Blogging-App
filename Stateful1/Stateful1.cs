@@ -25,7 +25,7 @@ namespace Stateful1
     /// 
     internal sealed class Stateful1 : StatefulService, IMyService
     {
-        public string LoggedIn = "false";
+        //public string LoggedIn = "false";
         private bool collectionsReady; // use this when primary is called
         private string[] logged = {"false"}; // variable for checking if user is logged in or not
         private CancellationToken token;
@@ -48,13 +48,8 @@ namespace Stateful1
         /// is the value. A structured type for my key containing username and timestamp is used
         /// because it is more efficent than concatenated string
         /// </summary>
-        public async Task<string> NewPost(string t, string tag)
+        public async Task<string> NewPost(string t, string tag, string username)
         {
-            // prevent user from posting by checking if they are logged in or not
-            if (this.logged[0] == "false")
-            {
-                return ("You must be logged in to post");
-            }
             while (!this.collectionsReady)
             {
                 await Task.Delay(TimeSpan.FromMilliseconds(100));
@@ -92,7 +87,7 @@ namespace Stateful1
                         await this.StateManager.GetOrAddAsync<IReliableDictionary<UploadKey, string>>(hashTagDictionaryName);
                     try
                     {
-                        bool addResult = await hashTagDictionary.TryAddAsync(tx, new UploadKey(this.logged[0], now), t);
+                        bool addResult = await hashTagDictionary.TryAddAsync(tx, new UploadKey(username, now), t);
                     }
                     catch (Exception e)
                     {
@@ -213,7 +208,7 @@ namespace Stateful1
         public async Task<string> logIn(string username, string password)
         {
             IReliableDictionary<string, string> signD = await this.StateManager.GetOrAddAsync<IReliableDictionary<string, string>>("signD");
-
+            IReliableDictionary<string, string> loggedDictionary = await this.StateManager.GetOrAddAsync<IReliableDictionary<string, string>>("loggedDictionary");
             using (ITransaction tx = this.StateManager.CreateTransaction())
             {
                 ConditionalValue<string> userCombo = await signD.TryGetValueAsync(tx, username);
@@ -226,8 +221,9 @@ namespace Stateful1
                 {
                     if (userCombo.Value == password)
                     {
-                        this.LoggedIn = username;
+                        //this.LoggedIn = username;
                         this.logged[0] = username;
+                        //bool addResult = await loggedDictionary.TryAddAsync(tx, username, cookie);
                         return "Login successful";
                     }
                     else
@@ -245,14 +241,9 @@ namespace Stateful1
         /// get the dictionary. If it doesn't exist, you create it. Then, inside that dictionary, you add
         /// the image URL as the value 
         /// </summary>
-        public async Task<string> NewImage(string url, string tag)
+        public async Task<string> UrlImage(string url, string tag, string cookie)
 
         {
-            // prevent user from posting if they are not logged in
-            if (this.logged[0] == "false")
-            {
-                return "You must be logged in to post";
-            }
             while (!this.collectionsReady)
             {
                 await Task.Delay(TimeSpan.FromMilliseconds(100));
@@ -286,7 +277,7 @@ namespace Stateful1
                         await this.StateManager.GetOrAddAsync<IReliableDictionary<UploadKey, string>>(hashTagDictionaryName);
                     try
                     {
-                        bool addResult = await hashTagDictionary.TryAddAsync(tx, new UploadKey(this.logged[0], now), url);
+                        bool addResult = await hashTagDictionary.TryAddAsync(tx, new UploadKey(cookie, now), url);
                     }
                     catch (Exception e)
                     {
@@ -319,13 +310,8 @@ namespace Stateful1
         /// get the dictionary. If it doesn't exist, you create it. Then, inside that dictionary, you add
         /// the image string as the value 
         /// </summary>
-        public async Task<string> uploadImage(string url, string tag)
+        public async Task<string> uploadImage(string url, string tag, string username)
         {
-            // prevent user from posting if they are not logged in
-            if (this.logged[0] == "false")
-            {
-                return "You must be logged in to post";
-            }
             while (!this.collectionsReady)
             {
                 await Task.Delay(TimeSpan.FromMilliseconds(100));
@@ -356,7 +342,7 @@ namespace Stateful1
                     // create a dictionary for each hashtag
                     IReliableDictionary<UploadKey, string> hashTagDictionary =
                         await this.StateManager.GetOrAddAsync<IReliableDictionary<UploadKey, string>>(hashTagDictionaryName + "Image");
-                    bool addResult = await hashTagDictionary.TryAddAsync(tx, new UploadKey(this.logged[0], now), url);
+                    bool addResult = await hashTagDictionary.TryAddAsync(tx, new UploadKey(username, now), url);
                 }
                    
                 await tx.CommitAsync();

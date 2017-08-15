@@ -15,11 +15,11 @@ namespace Web1.Controllers
        
         [HttpGet] //api/{id}    ?id1=djaksdjkas&id2=djkasdjas     //post/{textbox}/{ds}
         [Route("api/post")]
-        public async Task<String> Get([FromQuery]string id2, [FromQuery]string id3)
+        public async Task<String> Get([FromQuery]string id2, [FromQuery]string id3, [FromQuery] string cookie)
         {
             IMyService post1 = ServiceProxy.Create<IMyService>(new Uri("fabric:/Application2/Stateful1"), new ServicePartitionKey(0));
 
-            string message = await post1.NewPost(id2, id3);
+            string message = await post1.NewPost(id2, id3, cookie);
             return message;
         }
 

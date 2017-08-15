@@ -84,13 +84,6 @@
         display: table;
     }
 
-    /* Change styles for cancel button and signup button on extra small screens */
-    @media screen and (max-width: 300px) {
-        .cancelbtn, .signupbtn {
-            width: 100%;
-        }
-    }
-
     .header {
         background-color: darkorchid;
         color: white;
@@ -121,11 +114,10 @@
 
             <div class="clearfix">
                 <input type="reset" class="cancelbtn" value="Cancel">
-                <input type="button" class="signupbtn" value="Submit" onclick="visitPage()">
+                <input type="button" class="signupbtn" value="Submit" onclick="signUp()">
             </div>
         </div>
-        signUp();
-        
+       
     </form>
 
 </body>
