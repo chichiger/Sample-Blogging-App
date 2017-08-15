@@ -20,7 +20,9 @@ This sample app contains two services and demonstrates how to use key parts of S
   ### Key Concepts
   * Communicating with back end over HTTP using Service Proxy
 ## Stateful Backend Service
-This service demonstrates the use of [Reliable Collections](https://docs.microsoft.com/en-us/azure/service-fabric/service-fabric-reliable-services-reliable-collections) in a stateful service
+This service demonstrates the use of [Reliable Collections](https://docs.microsoft.com/en-us/azure/service-fabric/service-fabric-reliable-services-reliable-collections) in a stateful service.
+
+[Service Remoting](https://docs.microsoft.com/en-us/azure/service-fabric/service-fabric-reliable-services-communication-remoting) is also used here to communicate between the services
   ### Key Concepts
   * Reliable Collections
   * MVC Controllers
