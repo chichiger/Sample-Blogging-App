@@ -23,7 +23,7 @@ namespace Web1.Controllers
         public async Task<string> Get([FromQuery] string id1)
         {
             IMyService post2 = ServiceProxy.Create<IMyService>(new Uri("fabric:/Application2/Stateful1"), new ServicePartitionKey(0));
-            string results = await post2.getPost(id1);
+            string results = await post2.GetPost(id1);
             return results;
         }
 

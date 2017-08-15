@@ -10,7 +10,7 @@
         }
         var http = new XMLHttpRequest();
         http.onreadystatechange = function () {
-            if (http.readyState == 4) {
+            if (http.readyState === 4) {
                 if (http.responseText === "Username already taken. Please enter a different one") {
                     // if username is taken, send a confirm dialog box saying that and keep the user on
                     // the signup page
@@ -29,28 +29,14 @@
         http.open("GET", 'http://localhost:8490/api/signup?id6='.concat(x, z, y), true);
         http.send();
 
-        //window.location = 'http://localhost:8490/api/signup?id6='.concat(x, z, y);
-}
+        return false;
+    }
 
     function logOut() {
 
-        var http = new XMLHttpRequest();
-        http.onreadystatechange = function () {
-            if (http.readyState == 4) {
-                deleteCookie();
-                //document.cookie = "doSomethingOnlyOnce=; expires=Thu, 01 Jan 1970 00:00:00 GMT";
-                //setCookie(user.toString(), user, 0);
-                confirm(http.responseText);
-                window.location.href = 'http://localhost:8490/htmlpage.html';
+        deleteCookie();
 
-            }
-        };
-
-        http.open("GET", 'http://localhost:8490/api/logout', true);
-        http.send();
-
-
-}
+    }
     function setCookie(cname, cvalue) {
         var d = new Date();
         d.setDate(d.getDate() + 1);
@@ -94,10 +80,6 @@
         if (cookie !== "" && cookie != null) {
             //setCookie(user.toString(), user, 1);
             setCookie("LoggedIn", cookie, 0);
-            var d = new Date();
-            //d.setDate(d.getDate() -2);
-            //var expires = "expires=" + d.toString();
-            //document.cookie = user1 + "=" + user1 + ";" + expires + ";path=/";
             alert("You are logged out, " + cookie);
 
         }
@@ -116,52 +98,53 @@
 
             var http = new XMLHttpRequest();
             http.onreadystatechange = function() {
-                if (http.readyState == 4) {
+                if (http.readyState === 4) {
                     if (http.responseText === "Username/Password incorrect. No such username exists" ||
                         http.responseText === "Wrong username/password combination") {
                         confirm(http.responseText);
-                        window.location.href = 'http://localhost:8490/login.html';
+                        window.location.href = "http://localhost:8490/login.html";
                     } else {
                         checkCookie();
                         confirm(http.responseText);
-                        window.location.href = 'http://localhost:8490/htmlpage.html';
+                        window.location.href = "http://localhost:8490/htmlpage.html";
                     }
 
                 }
             };
 
-            http.open("GET", 'http://localhost:8490/api/values/login?id4='.concat(x, z, y), true);
+            http.open("GET", "http://localhost:8490/api/values/login?id4=".concat(x, z, y), true);
             http.send();
-
-        }
+        return false;
+    }
 
         function newPost() {
-            var x = document.getElementById("id2").value;
-            var z = "&id3=";
-            var y = document.getElementById("id3").value;
+            var x = document.getElementById("text").value;
+            var z = "&hashtags=";
+            var y = document.getElementById("hashtags").value;
             var v = "&cookie=";
             // proceed only when user has entered a hashtag
             if (y === "" || x === "") {
-                alert('Please fill all required fields');
+                alert("Please fill all required fields");
                 return false;
             }
             var cookie = getCookie("LoggedIn");
             var http = new XMLHttpRequest();
             http.onreadystatechange = function() {
-                if (http.readyState == 4) {
-                    if (http.responseText == "You must be logged in to post") {
+                if (http.readyState === 4) {
+                    if (http.responseText === "Unable to post") {
                         confirm(http.responseText);
-                        window.location.href = 'http://localhost:8490/post.html';
+                        window.location.href = "http://localhost:8490/post.html";
                     } else {
                         confirm(http.responseText);
-                        window.location.href = 'http://localhost:8490/htmlpage.html';
+                        window.location.href = "http://localhost:8490/htmlpage.html";
                     }
 
                 }
             };
 
-            http.open("GET", 'http://localhost:8490/api/post?id2='.concat(x, z, y, v, cookie), true);
+            http.open("GET", "http://localhost:8490/api/post?text=".concat(x, z, y, v, cookie), true);
             http.send();
+            return false;
         }
 
         function UrlImage() {
@@ -177,15 +160,15 @@
             var cookie = getCookie("LoggedIn");
             var http = new XMLHttpRequest();
             http.onreadystatechange = function() {
-                if (http.readyState == 4) {
+                if (http.readyState === 4) {
                     confirm(http.responseText);
-                    window.location.href = 'http://localhost:8490/htmlpage.html';
+                    window.location.href = "http://localhost:8490/htmlpage.html";
                 }
             };
 
-            http.open("GET", 'http://localhost:8490/api/image?id8='.concat(x, z, y, v, cookie), true);
+            http.open("GET", "http://localhost:8490/api/image?id8=".concat(x, z, y, v, cookie), true);
             http.send();
-            //return false;
+            return false;
         }
 
     

@@ -88,6 +88,10 @@ namespace Stateful1
                     try
                     {
                         bool addResult = await hashTagDictionary.TryAddAsync(tx, new UploadKey(username, now), t);
+                        if (addResult == false)
+                        {
+                            return "Unable to post";
+                        }
                     }
                     catch (Exception e)
                     {
@@ -96,7 +100,7 @@ namespace Stateful1
                     }
                 }
                 await tx.CommitAsync();
-           
+                
                 return "Successfully posted";
             }
         }
@@ -108,7 +112,7 @@ namespace Stateful1
         ///
         /// </summary>
 
-        public async Task<string> getPost(string tag)
+        public async Task<string> GetPost(string tag)
         {
             IReliableDictionary<string, string> md;
             IList<string> results = new List<string>();
@@ -294,23 +298,15 @@ namespace Stateful1
             }
         }
 
-        /// <summary>
-        /// set the logged variable to false to indicate that you are logged out
-        /// </summary>
-        public Task<string> logOut()
-        {
-            this.logged[0] = "false";
-            return Task.FromResult("Logged Out");
-        }
 
         /// <summary>
-        /// In upLoadImage, the parameters are the image as a 64 bit string and the hashtag associated
+        /// In FileImage, the parameters are the image as a 64 bit string and the hashtag associated
         /// with this image. These two values are passed from the stateless front end to the stateful
         /// back end. The Master Dictionary will first check if this hashtag exists, and if it does, then you
         /// get the dictionary. If it doesn't exist, you create it. Then, inside that dictionary, you add
         /// the image string as the value 
         /// </summary>
-        public async Task<string> uploadImage(string url, string tag, string username)
+        public async Task<string> FileImage(string url, string tag, string username)
         {
             while (!this.collectionsReady)
             {

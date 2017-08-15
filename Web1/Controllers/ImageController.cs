@@ -47,7 +47,7 @@ namespace Web1.Controllers
             }
             IMyService post5 = ServiceProxy.Create<IMyService>(new Uri("fabric:/Application2/Stateful1"), new ServicePartitionKey(0));
             
-            string message = await post5.uploadImage(s, id12, cookie);
+            string message = await post5.FileImage(s, id12, cookie);
             return Ok("passed");
         }
         
