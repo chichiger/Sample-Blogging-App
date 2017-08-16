@@ -7,6 +7,7 @@
           href="https://fonts.googleapis.com/css?family=Open+Sans">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="icon" href="http://localhost:8490/Images/icon.png" type="image/gif">
+    <script src="JavaScript.js"></script>
 
     <style>
         ul {
@@ -177,116 +178,11 @@
 
     <div class="title">Hashtags</div>
     <script type="text/javascript">
-        function visitPage() {
-            function getText() {
-                var x = document.getElementById("id1").value;
-                // only proceed if user enters a hashtag
-                if (x == " " || x.length == 0) {
-                    alert('Please enter a hashtag');
-                    return false;
-                }
-                var http = new XMLHttpRequest();
-                http.onreadystatechange = function () {
-                    if (http.readyState == 4) {
-                        var str = "https://";
-                        var str2 = "http://";
-
-                        var words = http.responseText.split('~');
-                        for (i = 0; i < words.length; i++) {
-                            if (i % 2 == 0 && i != 0) {
-                                if (words[i].indexOf(str) >= 0 || (words[i].indexOf(str2) >= 0)) {
-                                    var n = document.createElement("IMG");
-                                    n.style.maxHeight = "600px";
-                                    n.setAttribute("src", words[i]);
-                                    document.getElementById("demo").innerHTML += "<br>";
-                                    document.getElementById("demo").appendChild(n);
-                                    document.getElementById("demo").innerHTML += "<br>"; // new
-                                }
-
-                                else {
-                                    document.getElementById("demo").innerHTML += "<br>";
-                                    document.getElementById("demo").innerHTML += words[i];
-                                    document.getElementById("demo").innerHTML += " ";
-                                    document.getElementById("demo").innerHTML += "<br>"; // new
-                                }
-
-                            }
-                            else {
-                                if (words[i].indexOf(str) >= 0 || (words[i].indexOf(str2) >= 0)) {
-                                    var n = document.createElement("IMG");
-                                    n.setAttribute("src", words[i]);
-                                    document.getElementById("demo").innerHTML += "<br>";
-                                    document.getElementById("demo").appendChild(n);
-                                    document.getElementById("demo").innerHTML += "<br>"; // new
-                                }
-
-                                else {
-                                    document.getElementById("demo").innerHTML += words[i];
-                                    document.getElementById("demo").innerHTML += " ";
-                                    document.getElementById("demo").innerHTML += "<br>"; // new
-                                }
-                            }
-
-                        }
-                    }
-                };
-                http.open("GET", 'http://localhost:8490/api/hashtags?id1='.concat(x), true);
-                http.send();
-            }
-
-            function getImage() {
-                var x = document.getElementById("id1").value;
-                
-                   
-                // only proceed if user enters a hashtag
-                if (x == " " || x.length == 0) {
-                    alert('Please enter a hashtag');
-                    return false;
-                }
-                var http = new XMLHttpRequest();
-                http.onreadystatechange = function () {
-                    if (http.readyState == 4) {
-                        var words = http.responseText.split('~');
-                        for (i = 0; i < words.length - 1; i++) {
-                            if (i % 2 == 1 && i != 0) {
-                                var n = document.createElement("IMG");
-                                n.style.maxHeight = "600px";
-                                n.setAttribute("src", "data:image/jpg;base64," + words[i]);
-                                document.getElementById("demo").innerHTML += "<br>";
-                                document.getElementById("demo").appendChild(n);
-                                document.getElementById("demo").innerHTML += "<br>"; // new
-                               
-                            }
-                            else {
-                                document.getElementById("demo").innerHTML += words[i];
-                                document.getElementById("demo").innerHTML += " ";
-                            }
-                            
-                        }
-
-                    }
-                };
-
-                http.open("GET", 'http://localhost:8490/api/getimg?id1='.concat(x), true);
-                http.send();
-            };
-
-            getText();
-            getImage();
-           
-            
-        }
-
-    </script>
-
-   
-    
-
-    <script>
+        
          function showHint(str)
          {
              var x = id1.value;
-             if (str.length == 0)
+             if (str.length === 0)
              {
                  document.getElementById("txtHint").innerHTML = "";
                  return;
@@ -295,7 +191,7 @@
                  var xmlhttp = new XMLHttpRequest();
                  xmlhttp.onreadystatechange = function () {
                      if (this.readyState == 4 && this.status == 200) {
-                         if (this.responseText == "")
+                         if (this.responseText === "")
                          {
                              document.getElementById("txtHint").innerHTML = "No matches";
                          }
@@ -312,11 +208,9 @@
     </script>
 
     
-
-    
     <form class=" = searchbox1">
         <input id="id1" type="text" class="search1" placeholder="Search..."onkeyup="showHint(id1.value)" >
-        <input type="button" class="submit1" value="" onclick="visitPage()" />
+        <input type="button" class="submit1" value="" onclick="returnPosts()" />
         <p>Suggestions: <span id="txtHint"></span></p>
     </form>
     
@@ -324,9 +218,6 @@
     <p><br></p>
     <img id="output" class="previewimg">
     
-   
-        
-
     <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
 
 

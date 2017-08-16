@@ -40,7 +40,6 @@
     <Content Include="wwwroot\JavaScript.js" />
     <Content Include="wwwroot\js\JavaScript.js" />
     <Content Include="wwwroot\login.html" />
-    <Content Include="wwwroot\picupload.html" />
     <Content Include="wwwroot\post.html" />
     <Content Include="wwwroot\signup.html" />
     <Content Include="wwwroot\test.html" />

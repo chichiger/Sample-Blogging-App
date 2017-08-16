@@ -76,7 +76,7 @@
         }
 
         /* Clear floats */
-        .clearfix::after {
+        .clearfix:after {
             content: "";
             clear: both;
             display: table;
@@ -101,7 +101,6 @@
     <p><br></p>
     <h2>New Post</h2>
     <form>
-
         <div class="container">
             <p> Enter Text </p>
             <textarea rows="4" cols="55" id="text" placeholder="Text"></textarea>
@@ -114,9 +113,6 @@
             <input type="reset" class="cancelbtn" value="Cancel">
             <input type="button" class="signupbtn" value="Submit" onclick="newPost()">
         </div>
-
-
-
     </form>
 </body>
 </html>

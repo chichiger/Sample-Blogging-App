@@ -284,7 +284,6 @@ namespace Stateful1
             }
         }
 
-
         /// <summary>
         /// In FileImage, the parameters are the image as a 64 bit string and the hashtag associated
         /// with this image. These two values are passed from the stateless front end to the stateful
@@ -430,7 +429,6 @@ namespace Stateful1
                 return answer.ToString();
             }
         }
-
 
         protected override IEnumerable<ServiceReplicaListener> CreateServiceReplicaListeners()
         {

@@ -180,4 +180,98 @@
             return false;
         }
 
-    
+    function returnPosts() {
+        function getText() {
+            var x = document.getElementById("id1").value;
+            // only proceed if user enters a hashtag
+            if (x === " " || x.length === 0) {
+                alert("Please enter a hashtag");
+                return false;
+            }
+            var http = new XMLHttpRequest();
+            http.onreadystatechange = function () {
+                if (http.readyState === 4) {
+                    var str = "https://";
+                    var str2 = "http://";
+
+                    var words = http.responseText.split("~");
+                    for (i = 0; i < words.length; i++) {
+                        if (i % 2 === 0 && i !== 0) {
+                            if (words[i].indexOf(str) >= 0 || (words[i].indexOf(str2) >= 0)) {
+                                var n = document.createElement("IMG");
+                                n.style.maxHeight = "600px";
+                                n.setAttribute("src", words[i]);
+                                document.getElementById("demo").innerHTML += "<br>";
+                                document.getElementById("demo").appendChild(n);
+                                document.getElementById("demo").innerHTML += "<br>"; // new
+                            }
+
+                            else {
+                                document.getElementById("demo").innerHTML += "<br>";
+                                document.getElementById("demo").innerHTML += words[i];
+                                document.getElementById("demo").innerHTML += " ";
+                                document.getElementById("demo").innerHTML += "<br>"; // new
+                            }
+
+                        }
+                        else {
+                            if (words[i].indexOf(str) >= 0 || (words[i].indexOf(str2) >= 0)) {
+                                var n = document.createElement("IMG");
+                                n.setAttribute("src", words[i]);
+                                document.getElementById("demo").innerHTML += "<br>";
+                                document.getElementById("demo").appendChild(n);
+                                document.getElementById("demo").innerHTML += "<br>"; // new
+                            }
+
+                            else {
+                                document.getElementById("demo").innerHTML += words[i];
+                                document.getElementById("demo").innerHTML += " ";
+                                document.getElementById("demo").innerHTML += "<br>"; // new
+                            }
+                        }
+
+                    }
+                }
+            };
+            http.open("GET", 'http://localhost:8490/api/hashtags?id1='.concat(x), true);
+            http.send();
+        }
+
+        function getImage() {
+            var x = document.getElementById("id1").value;
+
+            // only proceed if user enters a hashtag
+            if (x === " " || x.length === 0) {
+                alert("Please enter a hashtag");
+                return false;
+            }
+            var http = new XMLHttpRequest();
+            http.onreadystatechange = function () {
+                if (http.readyState === 4) {
+                    var words = http.responseText.split("~");
+                    for (i = 0; i < words.length - 1; i++) {
+                        if (i % 2 === 1 && i !== 0) {
+                            var n = document.createElement("IMG");
+                            n.style.maxHeight = "600px";
+                            n.setAttribute("src", "data:image/jpg;base64," + words[i]);
+                            document.getElementById("demo").innerHTML += "<br>";
+                            document.getElementById("demo").appendChild(n);
+                            document.getElementById("demo").innerHTML += "<br>"; // new
+                        }
+                        else {
+                            document.getElementById("demo").innerHTML += words[i];
+                            document.getElementById("demo").innerHTML += " ";
+                        }
+
+                    }
+
+                }
+            };
+
+            http.open("GET", "http://localhost:8490/api/getimg?id1=".concat(x), true);
+            http.send();
+        };
+
+        getText();
+        getImage();
+    }

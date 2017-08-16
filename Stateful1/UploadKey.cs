@@ -26,7 +26,7 @@ namespace Stateful1
             this.timeStamp = timeStamp;
         }
 
-        public string ToString()
+        public new string ToString()
         {
             return this.username + " " + this.timeStamp;
         }
@@ -34,13 +34,6 @@ namespace Stateful1
 
         public int CompareTo(UploadKey other)
         {
-            /*
-            if (this.timeStamp == other.timeStamp)
-            {
-                return this.username.CompareTo(other.username);
-            }
-            return other.timeStamp.CompareTo(this.timeStamp);
-            */
             if (this.timeStamp.CompareTo(other.timeStamp) > 0)
             {
                 return 1;
@@ -59,7 +52,6 @@ namespace Stateful1
 
         public bool Equals(UploadKey other)
         {
-
             if (other == null)
             {
                 return false;
