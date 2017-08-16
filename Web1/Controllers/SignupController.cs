@@ -13,7 +13,6 @@ namespace Web1.Controllers
         [HttpGet] 
         [Route("api/signup")]
         public async Task<String> Get([FromQuery]string id6, [FromQuery]string id7)
-
         {
             IMyService post3 = ServiceProxy.Create<IMyService>(new Uri("fabric:/Application2/Stateful1"), new ServicePartitionKey(0));
 
